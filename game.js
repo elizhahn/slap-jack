@@ -1,6 +1,6 @@
 class Game {
-  constructor(player1, player2) {
-    this.cardDeck = [
+  constructor() {
+    this.cards = [
     "card-deck-assets/blue-01.png",
     "card-deck-assets/blue-02.png",
     "card-deck-assets/blue-03.png",
@@ -59,9 +59,14 @@ class Game {
     this.currentPlayer = 1;
   }
   shuffleDeck() {
-
+    var shuffledCards = [];
+    for(var i = 0; i < this.cards.length; i++) {
+      var index = Math.floor(Math.random() * this.cards.length)
+      shuffledCards.push(this.cards[index])
+    }
+    this.cards = shuffledCards;
   }
   dealCards() {
-    
+
   }
 }
