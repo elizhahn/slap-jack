@@ -18,15 +18,20 @@ body {
 
 h1 {
   text-align: center;
+  font-weight: lighter;
+  font-style: italic;
+  font-size: 2.3em;
+  text-shadow: #fff 1px 0px 10px;
   margin-top: 20px;
 }
-
 
  .game-container {
   height: 100%;
   display: flex;
   align-items: center;
 }
+
+/* ----------------CARD PILES------------------------- */
 
 .game-card-pile {
   height: 100%;
@@ -38,7 +43,7 @@ h1 {
 }
 
 .middle-pile {
-  margin-bottom: 95px;
+  margin-bottom: 100px;
 }
 
 .player-cards {
@@ -46,6 +51,13 @@ h1 {
   height: 51%;
   width: 56%;
 }
+
+.player-wins {
+  margin-top: 10px;
+  font-size: 1.3em;
+}
+
+/* ---------------CARD COLORS---------------------- */
 
 .player-1-color {
   box-shadow: 0px 0px 40px #1f036b;
