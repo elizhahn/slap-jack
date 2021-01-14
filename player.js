@@ -13,6 +13,7 @@ class Player {
 
   }
   saveToStorage() {
-
+    var player = JSON.stringify(this);
+    localStorage.setItem(this.id, player)
   }
 }
