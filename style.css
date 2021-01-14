@@ -1,5 +1,6 @@
 * {
   font-family: "Tahoma", sans-serif;
+  color: #b4f0eb;
   border-style: solid;
   border-color: red;
   border-width: thin;
@@ -15,6 +16,12 @@ body {
   background: linear-gradient(90deg, #de16a5, #f07b32 70%);
 }
 
+h1 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+
  .game-container {
   height: 100%;
   display: flex;
@@ -27,16 +34,15 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 80px;
 }
 
-.player {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.middle-pile {
+  margin-bottom: 95px;
 }
 
-.player-card {
+.player-cards {
   border-radius: 10px;
-   height: 75%;
-   width: 50%;
+  height: 51%;
+  width: 56%;
 }
