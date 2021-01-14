@@ -1,3 +1,6 @@
+var player1 = new Player(1);
+var player2 = new Player(2);
+
 class Game {
   constructor() {
     this.cards = [
@@ -54,8 +57,7 @@ class Game {
     "card-deck-assets/red-queen.png",
     "card-deck-assets/red-king.png"
     ];
-    this.player1 = player1;
-    this.player2 = player2;
+    this.players = [player1, player2];
     this.currentPlayer = 1;
   }
   shuffleDeck() {
@@ -67,6 +69,11 @@ class Game {
     this.cards = shuffledCards;
   }
   dealCards() {
-
+  var player1Cards = this.cards.splice(0, 26)
+  var player2Cards = this.cards.splice(0)
+  this.players[0].hand = player1Cards;
+  this.players[1].hand = player2Cards;
   }
 }
+
+var game = new Game();
