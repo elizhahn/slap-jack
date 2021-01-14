@@ -1,0 +1,84 @@
+* {
+  font-family: "Tahoma", sans-serif;
+  color: #b4f0eb;
+  border-style: solid;
+  border-color: red;
+  border-width: thin;
+  margin: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background: linear-gradient(90deg, #de16a5, #f07b32 70%);
+}
+
+h1 {
+  text-align: center;
+  font-weight: lighter;
+  font-style: italic;
+  font-size: 2.3em;
+  text-shadow: #fff 1px 0px 10px;
+  margin-top: 20px;
+}
+
+
+/* ----------------CARD PILES------------------------- */
+
+.game-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.game-card-pile {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+.middle-pile {
+  margin-bottom: 100px;
+}
+
+.player-cards {
+  border-radius: 10px;
+  height: 51%;
+  width: 56%;
+}
+
+.player-wins {
+  margin-top: 10px;
+  font-size: 1.3em;
+}
+
+/* ---------------CARD COLORS---------------------- */
+
+.player-1-color {
+  box-shadow: 0px 0px 40px #1f036b;
+}
+
+.player-2-color {
+  box-shadow: 0px 0px 40px #0c6103;
+}
+
+.middle-card-player-1 {
+  box-shadow: 0px 0px 50px #1f036b, -17px 0px 0 -5px #eee, 11px -5px 0 -5px #eee
+}
+
+.middle-card-player-2 {
+  box-shadow: 0px 0px 50px #0c6103, -17px 0px 0 -5px #eee, 11px -5px 0 -5px #eee
+
+}
+
+/* ----------------STATE----------------------------- */
+
+.hidden {
+  visibility: hiddencd;
+}
