@@ -80,5 +80,5 @@ h1 {
 /* ----------------STATE----------------------------- */
 
 .hidden {
-  visibility: hiddencd;
+  visibility: hidden;
 }
