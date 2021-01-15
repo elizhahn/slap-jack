@@ -129,7 +129,16 @@ class Game {
       }
       return true;
     }
-  
+    for(var suit in suits) {
+      var suit = suits[suit];
+      if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 2]) && this.currentPlayer === 0) {
+        this.players[0].hand = [...this.players[0].hand, ...cardsWon];
+      } else if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 2]) && this.currentPlayer === 1){
+        this.players[1].hand = [...this.players[1].hand, ...cardsWon];
+      }
+    }
+      return true;
+
 
       //if a double appears
       //
