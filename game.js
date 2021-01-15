@@ -1,5 +1,5 @@
-var player1 = new Player(1);
-var player2 = new Player(2);
+var player1 = new Player(0);
+var player2 = new Player(1);
 
 class Game {
   constructor() {
