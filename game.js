@@ -119,14 +119,17 @@ class Game {
     var cardsWon = this.middlePile.splice(0)
     var jacks = suits.jack;
 
-    //refactor
+    //if a jack appears
     if(jacks.includes(lastCard) && this.currentPlayer === 0) {
       this.players[0].hand = [...this.players[0].hand, ...cardsWon];
+      this.players[0].shufflePlayerDeck();
       return true;
     } else if(jacks.includes(lastCard) && this.currentPlayer === 1) {
       this.players[1].hand = [...this.players[1].hand, ...cardsWon];
+      this.players[1].shufflePlayerDeck();
       return true;
     }
+    //if a double appears
     for(var suit in suits) {
       var suit = suits[suit];
       if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 2]) && this.currentPlayer === 0) {
@@ -137,10 +140,6 @@ class Game {
         return true;
       }
     }
-
-       // return true;
-      //if a double appears
-      //
 
       //if a sandwich appears
 
