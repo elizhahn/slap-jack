@@ -1,3 +1,5 @@
+// import Player from './player.js'
+
 var player1 = new Player(1);
 var player2 = new Player(2);
 
@@ -58,7 +60,8 @@ class Game {
     "card-deck-assets/red-king.png"
     ];
     this.players = [player1, player2];
-    this.currentPlayer = 1;
+    this.currentPlayer = 0;
+    this.middlePile = [];
   }
   shuffleDeck() {
     var shuffledCards = [];
@@ -73,6 +76,21 @@ class Game {
   var player2Cards = this.cards.splice(0)
   this.players[0].hand = player1Cards;
   this.players[1].hand = player2Cards;
+  }
+  playCard() {
+    if(this.currentPlayer === 0) {
+      this.middlePile.push(this.players[0].playCard());
+      this.currentPlayer = 1;
+    } else {
+      this.middlePile.push(this.players[1].playCard());
+      this.currentPlayer = 0;
+    }
+    //update currentCard that is in play for the DOM
+// call updateMiddleCard();
+// pass in argument that points to middle Card. grab
+//from array middlePile
+//this.middlePile[-1]
+
   }
 }
 
