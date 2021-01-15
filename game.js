@@ -1,5 +1,3 @@
-// import Player from './player.js'
-
 var player1 = new Player(1);
 var player2 = new Player(2);
 
