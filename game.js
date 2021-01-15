@@ -115,31 +115,30 @@ class Game {
   "queen" :["card-deck-assets/blue-queen.png","card-deck-assets/gold-queen.png","card-deck-assets/green-queen.png", "card-deck-assets/red-queen.png"],
   "king" : ["card-deck-assets/blue-king.png", "card-deck-assets/gold-king.png", "card-deck-assets/green-king.png", "card-deck-assets/red-king.png"]
   }
+    var lastCard = this.middlePile[this.middlePile.length - 1];
     var cardsWon = this.middlePile.splice(0)
-    var blueJack = "card-deck-assets/blue-jack.png";
-    var redJack = "card-deck-assets/red-jack.png";
-    var goldJack = "card-deck-assets/gold-jack.png";
-    var greenJack = "card-deck-assets/green-jack.png";
-    var length = this.middlePile.length
-    if(this.middlePile[length - 1] === blueJack || this.middlePile[length - 1] === redJack || this.middlePile[length - 1] === goldJack || this.middlePile[length - 1] === greenJack) {
-      if(this.currentPlayer === 0) {
-        this.players[0].hand = [...this.players[0].hand, ...cardsWon];
-      } else {
-        this.players[1].hand = [...this.players[1].hand, ...cardsWon];
-      }
+    var jacks = suits.jack;
+
+    //refactor
+    if(jacks.includes(lastCard) && this.currentPlayer === 0) {
+      this.players[0].hand = [...this.players[0].hand, ...cardsWon];
+      return true;
+    } else if(jacks.includes(lastCard) && this.currentPlayer === 1) {
+      this.players[1].hand = [...this.players[1].hand, ...cardsWon];
       return true;
     }
     for(var suit in suits) {
       var suit = suits[suit];
       if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 2]) && this.currentPlayer === 0) {
         this.players[0].hand = [...this.players[0].hand, ...cardsWon];
+        return true;
       } else if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 2]) && this.currentPlayer === 1){
         this.players[1].hand = [...this.players[1].hand, ...cardsWon];
+        return true;
       }
     }
-      return true;
 
-
+       // return true;
       //if a double appears
       //
 
