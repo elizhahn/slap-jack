@@ -65,7 +65,9 @@ class Game {
     var shuffledCards = [];
     for(var i = 0; i < 52; i++) {
       var index = Math.floor(Math.random() * this.cards.length)
-      shuffledCards.push(this.cards.splice(index, 1))
+      var randomCard = this.cards.splice(index, 1);
+      shuffledCards.push(randomCard[0])
+
     }
     this.cards = shuffledCards;
   }
