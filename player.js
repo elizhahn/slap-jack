@@ -9,7 +9,7 @@ class Player {
     var currentCard = this.hand.splice(-1);
     //push currentCard into middle deck array in Game class
     //will build out more functionality with Game class
-    return currentCard;
+    return currentCard[0];
 
   }
   saveToStorage() {
