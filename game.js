@@ -72,8 +72,8 @@ class Game {
     this.cards = shuffledCards;
   }
   dealCards() {
-  var player1Cards = this.cards.splice(0, 26)
-  var player2Cards = this.cards.splice(0)
+  var player1Cards = this.cards.splice(0, 26);
+  var player2Cards = this.cards.splice(0);
   this.players[0].hand = player1Cards;
   this.players[1].hand = player2Cards;
   }
@@ -105,9 +105,7 @@ class Game {
     var goldJack = "card-deck-assets/gold-jack.png";
     var greenJack = "card-deck-assets/green-jack.png";
     var length = this.middlePile.length
-// || this.middlePile[length - 1] === redJack || this.middlePile[length - 1] === goldJack || this.middlePile[length - 1] === greenJack
-    console.log(this.middlePile[length - 1]);
-     if(this.middlePile[length - 1] === blueJack) {
+     if(this.middlePile[length - 1] === blueJack || this.middlePile[length - 1] === redJack || this.middlePile[length - 1] === goldJack || this.middlePile[length - 1] === greenJack) {
       var cardsWon = this.middlePile.splice(0)
       if(this.currentPlayer === 0) {
         this.players[0].hand = [...this.players[0].hand, ...cardsWon];
