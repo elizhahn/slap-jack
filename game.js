@@ -90,6 +90,41 @@ class Game {
 //this.middlePile[-1]
 
   }
+  slap() {
+    //set the win conditions and return true
+    // in  main.js use a function attached to keypress that will call
+    //this method, use the true/false returns to use in the DOM.
+
+    //if slap hits a Jack
+    //middle pile goes to player who caused the keypress event
+    //return true
+    var blueJack = "card-deck-assets/blue-jack.png";
+    var redJack = "card-deck-assets/red-jack.png";
+    var goldJack = "card-deck-assets/gold-jack.png";
+    var greenJack = "card-deck-assets/green-jack.png";
+    var length = this.middlePile.length
+// || this.middlePile[length - 1] === redJack || this.middlePile[length - 1] === goldJack || this.middlePile[length - 1] === greenJack
+    console.log(this.middlePile[length - 1]);
+     if(this.middlePile[length - 1] === blueJack) {
+      var cardsWon = this.middlePile.splice(0)
+      if(this.currentPlayer === 0) {
+        this.players[0].hand = [...this.players[0].hand, ...cardsWon];
+      } else {
+        this.players[1].hand = [...this.players[1].hand, ...cardsWon];
+      }
+      return true;
+    }
+
+
+    //if a double appears
+    //
+
+    //if a sandwich appears
+
+    //invalid slap
+    //top card of player who slapped will go to other player
+    //player1.hand[-1];
+  }
 }
 
 var game = new Game();
