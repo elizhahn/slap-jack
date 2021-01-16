@@ -10,9 +10,13 @@ document.addEventListener("keydown", playCard);
   // document.addEventListern(keydown, slapCard)
 
 //GLOBAL VARIABLES
-var player1 = new Player(0);
-var player2 = new Player(1);
-var currentGame = new Game();
+var player0 = new Player(0);
+var player1 = new Player(1);
+var currentGame = new Game([player0, player1]);
+
+currentGame.shuffleDeck();
+currentGame.dealCards();
+
 
 
 //EVENT HANDLERS-----------------------------
@@ -26,9 +30,9 @@ var currentGame = new Game();
             //currentGame.currentPlayer = 0;
 
 function checkHand() {
-  if(currentGame.player[0].hand.length === 0) {
+  if(currentGame.players[0].hand.length === 0) {
     currentGame.currentPlayer = 1;
-} else if(currentGame.player[1].hand.length === 0) {
+} else if(currentGame.players[1].hand.length === 0) {
     currentGame.currentPlayer = 0;
 }
 }
@@ -38,17 +42,16 @@ function checkHand() {
 //function to set the currentPlayer..setCurrentPlayer(event)
 function setCurrentPlayer(event) {
   //player 0
-  if(event.keyCode === 81) {
-      currentGame.currentPlayer === 0;
+  if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
       return true;
   }
   //player 1
-   else if (event.keyCode === 80) {
-      currentGame.currentPlayer === 1;
+   else if (event.keyCode === 80 && currentGame.currentPlayer === 1) {  
       return true;
   } else {
       return false;
   }
+}
 
 
 //playCard function is called when a keydown event occurs
@@ -62,14 +65,14 @@ function setCurrentPlayer(event) {
       //is never set to currentPlayer
       //the playCard() method is now called on the currentGame: currentGame.playCard();
       // the currentPlayer will toggle back and forth normally if checkHand conditions are not met
-      function playCard() {
-        if(!checkHand()) {
-          return;
-      } else {
-          checkHand();
-          currentGame.playCard();
-      }
-      }
+  function playCard() {
+    if(!setCurrentPlayer(event)) {
+      return;
+  } else {
+      checkHand();
+      currentGame.playCard();
+  }
+  }
 
 
 //SLAPPING-------------------------------
