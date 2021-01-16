@@ -80,18 +80,17 @@ class Game {
   shuffleDeck() {
     var shuffledCards = [];
     for(var i = 0; i < 52; i++) {
-      var index = Math.floor(Math.random() * this.cards.length)
+      var index = Math.floor(Math.random() * this.cards.length);
       var randomCard = this.cards.splice(index, 1);
-      shuffledCards.push(randomCard[0])
-
-    }
+      shuffledCards.push(randomCard[0]);
+    };
     this.cards = shuffledCards;
   }
   dealCards() {
-  var player1Cards = this.cards.splice(0, 26);
-  var player2Cards = this.cards.splice(0);
-  this.players[0].hand = player1Cards;
-  this.players[1].hand = player2Cards;
+    var player1Cards = this.cards.splice(0, 26);
+    var player2Cards = this.cards.splice(0);
+    this.players[0].hand = player1Cards;
+    this.players[1].hand = player2Cards;
   }
   playCard() {
     if(this.currentPlayer === 0) {
@@ -107,7 +106,7 @@ class Game {
 //from array middlePile
 //this.middlePile[-1]
 
-  }
+};
   //In main.js, will listen for keydown condition on specific keys.
   //eventListner keydown
   //then I have a function attemptSlap() {
@@ -121,10 +120,6 @@ class Game {
     // in  main.js use a function attached to keypress that will call
     //this method, use the true/false returns to use in the DOM.
 
-    //if slap hits a Jack
-    //middle pile goes to player who caused the keypress event
-    //return true
-    // this.slapJack();
       if(this.slapJack()) {
         return true;
     } else if(this.slapDouble()) {
@@ -134,62 +129,61 @@ class Game {
     } else {
         this.invalidSlap();
         return false;
-   }
-  }
-    slapJack() {
-    var lastCard = this.middlePile[this.middlePile.length - 1];
-    var jacks = this.suits.jack;
-    var cardsWon;
-      if(jacks.includes(lastCard) && this.whoSlapped === 0) {
-        cardsWon = this.middlePile.splice(0);
-        this.players[0].hand = [...this.players[0].hand, ...cardsWon];
-        this.players[0].shufflePlayerDeck();
-        return true;
-      } else if(jacks.includes(lastCard) && this.whoSlapped === 1) {
-        cardsWon = this.middlePile.splice(0);
-        this.players[1].hand = [...this.players[1].hand, ...cardsWon];
-        this.players[1].shufflePlayerDeck();
-        return true;
-      }
-  }
-    slapDouble() {
-    var cardsWon;
-    var length = this.middlePile.length;
-    for(var suit in this.suits) {
-      var currentSuit = this.suits[suit];
-      if(currentSuit.includes(this.middlePile[length - 1]) && currentSuit.includes(this.middlePile[length - 2])) {
-        cardsWon = this.middlePile.splice(0);
-        this.players[0].hand = [...this.players[0].hand, ...cardsWon];
-        this.players[0].shufflePlayerDeck();
-        return true;
-      } else if(currentSuit.includes(this.middlePile[length - 1] && currentSuit.includes(this.middlePile[length - 2])) && this.whoSlapped === 1){
-        cardsWon = this.middlePile.splice(0);
-        this.players[1].hand = [...this.players[1].hand, ...cardsWon];
-        this.players[1].shufflePlayerDeck();
-        return true;
-      }
     }
-  }
-     slapSandwich(){
+  };
+    slapJack() {
+      var lastCard = this.middlePile[this.middlePile.length - 1];
+      var jacks = this.suits.jack;
       var cardsWon;
-      var length = this.middlePile.length;
-      for(var suit in this.suits) {
-        var currentSuit = this.suits[suit];
-        if(currentSuit.includes(this.middlePile[length - 1]) && currentSuit.includes(this.middlePile[length - 3]) && this.whoSlapped === 0) {
+        if(jacks.includes(lastCard) && this.whoSlapped === 0) {
           cardsWon = this.middlePile.splice(0);
           this.players[0].hand = [...this.players[0].hand, ...cardsWon];
           this.players[0].shufflePlayerDeck();
           return true;
-        } else if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 3]) && this.whoSlapped === 1) {
+        } else if(jacks.includes(lastCard) && this.whoSlapped === 1) {
           cardsWon = this.middlePile.splice(0);
           this.players[1].hand = [...this.players[1].hand, ...cardsWon];
           this.players[1].shufflePlayerDeck();
           return true;
         }
-       }
-      }
+    };
+    slapDouble() {
+      var cardsWon;
+      var length = this.middlePile.length;
+        for(var suit in this.suits) {
+          var currentSuit = this.suits[suit];
+            if(currentSuit.includes(this.middlePile[length - 1]) && currentSuit.includes(this.middlePile[length - 2])) {
+              cardsWon = this.middlePile.splice(0);
+              this.players[0].hand = [...this.players[0].hand, ...cardsWon];
+              this.players[0].shufflePlayerDeck();
+              return true;
+            } else if(currentSuit.includes(this.middlePile[length - 1] && currentSuit.includes(this.middlePile[length - 2])) && this.whoSlapped === 1) {
+              cardsWon = this.middlePile.splice(0);
+              this.players[1].hand = [...this.players[1].hand, ...cardsWon];
+              this.players[1].shufflePlayerDeck();
+              return true;
+            }
+          };
+     };
+     slapSandwich(){
+      var cardsWon;
+      var length = this.middlePile.length;
+        for(var suit in this.suits) {
+          var currentSuit = this.suits[suit];
+            if(currentSuit.includes(this.middlePile[length - 1]) && currentSuit.includes(this.middlePile[length - 3]) && this.whoSlapped === 0) {
+              cardsWon = this.middlePile.splice(0);
+              this.players[0].hand = [...this.players[0].hand, ...cardsWon];
+              this.players[0].shufflePlayerDeck();
+              return true;
+            } else if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 3]) && this.whoSlapped === 1) {
+              cardsWon = this.middlePile.splice(0);
+              this.players[1].hand = [...this.players[1].hand, ...cardsWon];
+              this.players[1].shufflePlayerDeck();
+              return true;
+            }
+         };
+      };
       invalidSlap() {
-        //if currentGame.slap() returns false then execute this method in main.js
         if(this.whoSlapped === 0) {
           var length = this.players[0].hand.length;
           var topCard = this.players[0].hand.splice(length - 1);
@@ -198,9 +192,9 @@ class Game {
           var length = this.players[1].hand.length;
           var topCard = this.players[1].hand.splice(length - 1);
           this.players[0].hand.unshift(topCard[0]);
-    }
-  }
-}
+      }
+      };
+    };
 
 
 
