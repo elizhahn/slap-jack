@@ -1,5 +1,5 @@
 class Game {
-  constructor() {
+  constructor(players) {
     this.cards = [
     "card-deck-assets/blue-01.png",
     "card-deck-assets/blue-02.png",
@@ -69,7 +69,7 @@ class Game {
     "queen" :["card-deck-assets/blue-queen.png","card-deck-assets/gold-queen.png","card-deck-assets/green-queen.png", "card-deck-assets/red-queen.png"],
     "king" : ["card-deck-assets/blue-king.png", "card-deck-assets/gold-king.png", "card-deck-assets/green-king.png", "card-deck-assets/red-king.png"]
     }
-    this.players = [player1, player2];
+    this.players = players;
     this.currentPlayer = 0;
     this.whoSlapped = 0;
     this.middlePile = [];
@@ -103,9 +103,7 @@ class Game {
 //from array middlePile
 //this.middlePile[-1]
 
-  }
-}
-};
+  };
   //In main.js, will listen for keydown condition on specific keys.
   //eventListner keydown
   //then I have a function attemptSlap() {
@@ -194,7 +192,3 @@ class Game {
       }
       };
     };
-
-
-
-var game = new Game();
