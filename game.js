@@ -59,6 +59,7 @@ class Game {
     ];
     this.players = [player1, player2];
     this.currentPlayer = 0;
+    this.whoSlapped = 0;
     this.middlePile = [];
   }
   shuffleDeck() {
@@ -92,6 +93,18 @@ class Game {
 //this.middlePile[-1]
 
   }
+  //In main.js, will listen for keydown condition on specific keys.
+  //eventListner keydown
+  //then I have a function attemptSlap() {
+     //if event.target === f: Player 0
+         //update currentGame.whoSlapped = 0
+         //currentGame.slap();
+     //if event.target === j: Player 1
+  //
+
+  //Using event.target, can decide if it was player 0 or player 1 based on keydown event.
+  //Using a conditional Player 0: if(event.target === f) Player 1: if(event.target === j) then set the current player in that function that can then
+  //be filtered in the method's conditional. So if event.target = f then
   slap() {
     //set the win conditions and return true
     // in  main.js use a function attached to keypress that will call
@@ -120,11 +133,11 @@ class Game {
     var jacks = suits.jack;
 
     //if a jack appears
-    if(jacks.includes(lastCard) && this.currentPlayer === 0) {
+    if(jacks.includes(lastCard) && this.whoSlapped === 0) {
       this.players[0].hand = [...this.players[0].hand, ...cardsWon];
       this.players[0].shufflePlayerDeck();
       return true;
-    } else if(jacks.includes(lastCard) && this.currentPlayer === 1) {
+    } else if(jacks.includes(lastCard) && this.whoSlapped === 1) {
       this.players[1].hand = [...this.players[1].hand, ...cardsWon];
       this.players[1].shufflePlayerDeck();
       return true;
@@ -132,20 +145,24 @@ class Game {
     //if a double appears
     for(var suit in suits) {
       var suit = suits[suit];
-      if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 2]) && this.currentPlayer === 0) {
+      if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 2]) && this.whoSlapped === 0) {
         this.players[0].hand = [...this.players[0].hand, ...cardsWon];
         return true;
-      } else if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 2]) && this.currentPlayer === 1){
+      } else if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 2]) && this.whoSlapped === 1){
         this.players[1].hand = [...this.players[1].hand, ...cardsWon];
         return true;
       }
     }
-
       //if a sandwich appears
-
-      //invalid slap
-      //top card of player who slapped will go to other player
-      //player1.hand[-1];
+      for(var suit in suits) {
+        if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 3] && this.whoSlapped === 0) {
+          this.players[0].hand = [...this.players[0].hand, ...cardsWon];
+          return true;
+        } else if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 3] && this.whoSlapped === 1) {
+          this.players[1].hand = [...this.players[1].hand, ...cardsWon];
+          return true;
+      }
+    }    
   }
 }
 
