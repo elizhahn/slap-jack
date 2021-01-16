@@ -136,6 +136,7 @@ class Game {
     } else if(this.slapSandwich()) {
         return true;
     } else {
+        this.invalidSlap();
         return false;
    }
   }
@@ -187,8 +188,20 @@ class Game {
         }
        }
       }
+      invalidSlap() {
+        //if currentGame.slap() returns false then execute this method in main.js
+        if(this.whoSlapped === 0) {
+          var length = this.players[0].hand.length;
+          var topCard = this.players[0].hand.splice(length - 1);
+          this.players[1].hand.unshift(topCard[0]);
+      } else {
+          var length = this.players[1].hand.length;
+          var topCard = this.players[1].hand.splice(length - 1);
+          this.players[0].hand.unshift(topCard[0]);
     }
-  
+  }
+}
+
 
 
 var game = new Game();
