@@ -37,66 +37,38 @@ function checkHand() {
 }
 }
 
-
-//PLAY CARD-------------------------------------
-//function to set the currentPlayer..setCurrentPlayer(event)
-function setCurrentPlayer(event) {
+//Function to validate and execute any play Action
+function validatePlayAction(event) {
   //player 0
   if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
+      currentGame.playCard();
+      return true;
+  } else if (event.keyCode === 70) {
+      currentGame.whoSlapped = 0
+      currentGame.slap();
       return true;
   }
   //player 1
-   else if (event.keyCode === 80 && currentGame.currentPlayer === 1) {  
+   else if (event.keyCode === 80 && currentGame.currentPlayer === 1) {
+     currentGame.playCard();
+      return true;
+  } else if (event.keyCode === 74) {
+      currentGame.whoSlapped = 1
+      currentGame.slap();
       return true;
   } else {
-      return false;
+    return false;
   }
 }
 
 
-//playCard function is called when a keydown event occurs
-  // if(!setCurrentPlayer(event))
-     //maybe do an error message here...but not neccessary..
-     //otherwise return; --to stop functionality
-
-   //else if(setCurrentPlayer(event)--if returns true, then proper keys were hit and player is set.
-      // checkHand() is called here to check if their hand is empty
-      // if checkHand conditionals are met this function will ensure the player with the empty hand
-      //is never set to currentPlayer
-      //the playCard() method is now called on the currentGame: currentGame.playCard();
-      // the currentPlayer will toggle back and forth normally if checkHand conditions are not met
-  function playCard() {
-    if(!setCurrentPlayer(event)) {
-      return;
-  } else {
-      checkHand();
-      currentGame.playCard();
-  }
-  }
-
-
-//SLAPPING-------------------------------
-//function to decipher who slapped setWhoSlapped(event)
-//if event.target === f
-   //currentGame.whoSlapped === 0
-   //return true
-
-//if event.target === j
-    //currentGame.whoSlapped === 1
-    //return true
-
-//else return false---invalid key was pressed
+function playCard() {
+  checkHand();
+  validatePlayAction(event);
+}
 
 
 
-//slapping a card function slapCard()
-  //call setWhoSlapped(event) in a conditional to make sure a valid key was hit
-  //and to also set currentGame.whoSlapped property
-     //if(!setWhoSlapped(event))
-     //return
-
-     //if(setWhoSlapped(event))
-     //call currentGame.slap()
 
 // Player has one chance to win, must slap a jack? double check, also have to figure out how
 //to tell if pile was rotated through once
