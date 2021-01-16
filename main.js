@@ -62,7 +62,14 @@ function setCurrentPlayer(event) {
       //is never set to currentPlayer
       //the playCard() method is now called on the currentGame: currentGame.playCard();
       // the currentPlayer will toggle back and forth normally if checkHand conditions are not met
-
+      function playCard() {
+        if(!checkHand()) {
+          return;
+      } else {
+          checkHand();
+          currentGame.playCard();
+      }
+      }
 
 
 //SLAPPING-------------------------------
