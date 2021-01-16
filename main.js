@@ -5,10 +5,14 @@
 //resetting game on load
   //pageload.addEventListner(load, resetGame);
 //playing a card
-  // document.addEventListener(keydown, playCard)
+document.addEventListener("keydown", playCard);
 //slapping a card
   // document.addEventListern(keydown, slapCard)
 
+//GLOBAL VARIABLES
+var player1 = new Player(0);
+var player2 = new Player(1);
+var currentGame = new Game();
 
 
 //EVENT HANDLERS-----------------------------
@@ -21,18 +25,17 @@
         //if(currentGame.player[1].hand.length === 0)
             //currentGame.currentPlayer = 0;
 
+function checkHand() {
+  if(currentGame.player[0].hand.length === 0) {
+    currentGame.currentPlayer = 1;
+} else if(currentGame.player[1].hand.length === 0) {
+    currentGame.currentPlayer = 0;
+}
+}
+
 
 //PLAY CARD-------------------------------------
 //function to set the currentPlayer..setCurrentPlayer(event)
-  //if event.target === q
-     //currentPlayer === 0
-     //return true
-
-  //if event.target === p
-      //currentPlayer === 1
-      //return true
-
-  //else return false---invalid key was pressed
 
 
 
@@ -47,6 +50,7 @@
       //is never set to currentPlayer
       //the playCard() method is now called on the currentGame: currentGame.playCard();
       // the currentPlayer will toggle back and forth normally if checkHand conditions are not met
+
 
 
 //SLAPPING-------------------------------
@@ -73,4 +77,4 @@
      //call currentGame.slap()
 
 // Player has one chance to win, must slap a jack? double check, also have to figure out how
-//to tell if pile was rotated through once only
+//to tell if pile was rotated through once
