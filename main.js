@@ -36,7 +36,19 @@ function checkHand() {
 
 //PLAY CARD-------------------------------------
 //function to set the currentPlayer..setCurrentPlayer(event)
-
+function setCurrentPlayer(event) {
+  //player 0
+  if(event.keyCode === 81) {
+      currentGame.currentPlayer === 0;
+      return true;
+  }
+  //player 1
+   else if (event.keyCode === 80) {
+      currentGame.currentPlayer === 1;
+      return true;
+  } else {
+      return false;
+  }
 
 
 //playCard function is called when a keydown event occurs
