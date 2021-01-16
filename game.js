@@ -133,7 +133,7 @@ class Game {
         return true;
     } else if(this.slapDouble()) {
         return true;
-    } else if(this.slapDouble()) {
+    } else if(this.slapSandwich()) {
         return true;
     } else {
         return false;
@@ -160,11 +160,11 @@ class Game {
     var length = this.middlePile.length;
     for(var suit in this.suits) {
       var currentSuit = this.suits[suit];
-      if(currentSuit.includes(this.middlePile[length - 1] && this.middlePile[length - 2])) {
+      if(currentSuit.includes(this.middlePile[length - 1]) && currentSuit.includes(this.middlePile[length - 2])) {
         cardsWon = this.middlePile.splice(0);
         this.players[0].hand = [...this.players[0].hand, ...cardsWon];
         return true;
-      } else if(currentSuit.includes(this.middlePile[length - 1] && this.middlePile[length - 2]) && this.whoSlapped === 1){
+      } else if(currentSuit.includes(this.middlePile[length - 1] && currentSuit.includes(this.middlePile[length - 2])) && this.whoSlapped === 1){
         cardsWon = this.middlePile.splice(0);
         this.players[1].hand = [...this.players[1].hand, ...cardsWon];
         return true;
@@ -175,8 +175,8 @@ class Game {
       var cardsWon;
       var length = this.middlePile.length;
       for(var suit in this.suits) {
-        var suit = this.suits[suit];
-        if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 3]) && this.whoSlapped === 0) {
+        var currentSuit = this.suits[suit];
+        if(currentSuit.includes(this.middlePile[length - 1]) && currentSuit.includes(this.middlePile[length - 3]) && this.whoSlapped === 0) {
           cardsWon = this.middlePile.splice(0);
           this.players[0].hand = [...this.players[0].hand, ...cardsWon];
           return true;
@@ -185,9 +185,10 @@ class Game {
           this.players[1].hand = [...this.players[1].hand, ...cardsWon];
           return true;
         }
+       }
       }
     }
-  }
+  
 
 
 var game = new Game();
