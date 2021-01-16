@@ -1,6 +1,3 @@
-var player1 = new Player(0);
-var player2 = new Player(1);
-
 class Game {
   constructor() {
     this.cards = [
@@ -91,5 +88,3 @@ class Game {
 
   }
 }
-
-var game = new Game();
