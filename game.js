@@ -57,6 +57,21 @@ class Game {
     "card-deck-assets/red-queen.png",
     "card-deck-assets/red-king.png"
     ];
+    this.suits = {
+    "1" : ["card-deck-assets/gold-01.png", "card-deck-assets/blue-01.png", "card-deck-assets/green-01.png","card-deck-assets/red-01.png"],
+    "2" : ["card-deck-assets/blue-02.png", "card-deck-assets/gold-02.png", "card-deck-assets/green-02.png", "card-deck-assets/red-02.png"],
+    "3" : [ "card-deck-assets/blue-03.png", "card-deck-assets/gold-03.png", "card-deck-assets/green-03.png", "card-deck-assets/red-03.png"],
+    "4" : ["card-deck-assets/blue-04.png", "card-deck-assets/gold-04.png", "card-deck-assets/green-04.png", "card-deck-assets/red-04.png"],
+    "5" : ["card-deck-assets/blue-05.png", "card-deck-assets/gold-05.png", "card-deck-assets/green-05.png", "card-deck-assets/red-05.png"],
+    "6" : ["card-deck-assets/gold-06.png", "card-deck-assets/blue-06.png", "card-deck-assets/green-06.png", "card-deck-assets/red-06.png"],
+    "7" : ["card-deck-assets/gold-07.png", "card-deck-assets/blue-07.png", "card-deck-assets/green-07.png", "card-deck-assets/red-07.png"],
+    "8" : ["card-deck-assets/blue-08.png", "card-deck-assets/gold-08.png", "card-deck-assets/green-08.png", "card-deck-assets/red-08.png"],
+    "9" : ["card-deck-assets/blue-09.png", "card-deck-assets/gold-09.png", "card-deck-assets/green-09.png", "card-deck-assets/red-09.png"],
+    "10" :["card-deck-assets/blue-10.png", "card-deck-assets/gold-10.png", "card-deck-assets/green-10.png", "card-deck-assets/red-10.png"],
+    "jack":["card-deck-assets/blue-jack.png", "card-deck-assets/gold-jack.png", "card-deck-assets/green-jack.png", "card-deck-assets/red-jack.png"],
+    "queen" :["card-deck-assets/blue-queen.png","card-deck-assets/gold-queen.png","card-deck-assets/green-queen.png", "card-deck-assets/red-queen.png"],
+    "king" : ["card-deck-assets/blue-king.png", "card-deck-assets/gold-king.png", "card-deck-assets/green-king.png", "card-deck-assets/red-king.png"]
+    }
     this.players = [player1, player2];
     this.currentPlayer = 0;
     this.whoSlapped = 0;
@@ -113,68 +128,66 @@ class Game {
     //if slap hits a Jack
     //middle pile goes to player who caused the keypress event
     //return true
-    var suits = {
-  "1" : ["card-deck-assets/gold-01.png", "card-deck-assets/blue-01.png", "card-deck-assets/green-01.png","card-deck-assets/red-01.png"],
-  "2" : ["card-deck-assets/blue-02.png", "card-deck-assets/gold-02.png", "card-deck-assets/green-02.png", "card-deck-assets/red-02.png"],
-  "3" : [ "card-deck-assets/blue-03.png", "card-deck-assets/gold-03.png", "card-deck-assets/green-03.png", "card-deck-assets/red-03.png"],
-  "4" : ["card-deck-assets/blue-04.png", "card-deck-assets/gold-04.png", "card-deck-assets/green-04.png", "card-deck-assets/red-04.png"],
-  "5" : ["card-deck-assets/blue-05.png", "card-deck-assets/gold-05.png", "card-deck-assets/green-05.png", "card-deck-assets/red-05.png"],
-  "6" : ["card-deck-assets/gold-06.png", "card-deck-assets/blue-06.png", "card-deck-assets/green-06.png", "card-deck-assets/red-06.png"],
-  "7" : ["card-deck-assets/gold-07.png", "card-deck-assets/blue-07.png", "card-deck-assets/green-07.png", "card-deck-assets/red-07.png"],
-  "8" : ["card-deck-assets/blue-08.png", "card-deck-assets/gold-08.png", "card-deck-assets/green-08.png", "card-deck-assets/red-08.png"],
-  "9" : ["card-deck-assets/blue-09.png", "card-deck-assets/gold-09.png", "card-deck-assets/green-09.png", "card-deck-assets/red-09.png"],
-  "10" :["card-deck-assets/blue-10.png", "card-deck-assets/gold-10.png", "card-deck-assets/green-10.png", "card-deck-assets/red-10.png"],
-  "jack":["card-deck-assets/blue-jack.png", "card-deck-assets/gold-jack.png", "card-deck-assets/green-jack.png", "card-deck-assets/red-jack.png"],
-  "queen" :["card-deck-assets/blue-queen.png","card-deck-assets/gold-queen.png","card-deck-assets/green-queen.png", "card-deck-assets/red-queen.png"],
-  "king" : ["card-deck-assets/blue-king.png", "card-deck-assets/gold-king.png", "card-deck-assets/green-king.png", "card-deck-assets/red-king.png"]
+    // this.slapJack();
+      if(this.slapJack()) {
+        return true;
+    } else if(this.slapDouble()) {
+        return true;
+    } else if(this.slapDouble()) {
+        return true;
+    } else {
+        return false;
+   }
   }
+    slapJack() {
     var lastCard = this.middlePile[this.middlePile.length - 1];
-    var cardsWon = this.middlePile.splice(0)
-    var jacks = suits.jack;
-
-    //if a jack appears
-    if(jacks.includes(lastCard) && this.whoSlapped === 0) {
-      this.players[0].hand = [...this.players[0].hand, ...cardsWon];
-      this.players[0].shufflePlayerDeck();
-      return true;
-    } else if(jacks.includes(lastCard) && this.whoSlapped === 1) {
-      this.players[1].hand = [...this.players[1].hand, ...cardsWon];
-      this.players[1].shufflePlayerDeck();
-      return true;
-    }
-    //if a double appears
-    for(var suit in suits) {
-      var suit = suits[suit];
-      if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 2]) && this.whoSlapped === 0) {
+    var jacks = this.suits.jack;
+    var cardsWon;
+      if(jacks.includes(lastCard) && this.whoSlapped === 0) {
+        cardsWon = this.middlePile.splice(0);
+        this.players[0].hand = [...this.players[0].hand, ...cardsWon];
+        this.players[0].shufflePlayerDeck();
+        return true;
+      } else if(jacks.includes(lastCard) && this.whoSlapped === 1) {
+        cardsWon = this.middlePile.splice(0);
+        this.players[1].hand = [...this.players[1].hand, ...cardsWon];
+        this.players[1].shufflePlayerDeck();
+        return true;
+      }
+  }
+    slapDouble() {
+    var cardsWon;
+    var length = this.middlePile.length;
+    for(var suit in this.suits) {
+      var currentSuit = this.suits[suit];
+      if(currentSuit.includes(this.middlePile[length - 1] && this.middlePile[length - 2])) {
+        cardsWon = this.middlePile.splice(0);
         this.players[0].hand = [...this.players[0].hand, ...cardsWon];
         return true;
-      } else if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 2]) && this.whoSlapped === 1){
+      } else if(currentSuit.includes(this.middlePile[length - 1] && this.middlePile[length - 2]) && this.whoSlapped === 1){
+        cardsWon = this.middlePile.splice(0);
         this.players[1].hand = [...this.players[1].hand, ...cardsWon];
         return true;
       }
     }
-      //if a sandwich appears
-      for(var suit in suits) {
-        if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 3] && this.whoSlapped === 0) {
+  }
+     slapSandwich(){
+      var cardsWon;
+      var length = this.middlePile.length;
+      for(var suit in this.suits) {
+        var suit = this.suits[suit];
+        if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 3]) && this.whoSlapped === 0) {
+          cardsWon = this.middlePile.splice(0);
           this.players[0].hand = [...this.players[0].hand, ...cardsWon];
           return true;
-        } else if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 3] && this.whoSlapped === 1) {
+        } else if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 3]) && this.whoSlapped === 1) {
+          cardsWon = this.middlePile.splice(0);
           this.players[1].hand = [...this.players[1].hand, ...cardsWon];
           return true;
+        }
       }
-    }    
+    }
   }
-}
-
-
-    //if a double appears
-    //
-
-    //if a sandwich appears
-
-    //invalid slap
-    //top card of player who slapped will go to other player
-    //player1.hand[-1];
 
 
 var game = new Game();
