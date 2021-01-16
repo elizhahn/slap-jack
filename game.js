@@ -115,11 +115,7 @@ class Game {
          //update currentGame.whoSlapped = 0
          //currentGame.slap();
      //if event.target === j: Player 1
-  //
 
-  //Using event.target, can decide if it was player 0 or player 1 based on keydown event.
-  //Using a conditional Player 0: if(event.target === f) Player 1: if(event.target === j) then set the current player in that function that can then
-  //be filtered in the method's conditional. So if event.target = f then
   slap() {
     //set the win conditions and return true
     // in  main.js use a function attached to keypress that will call
@@ -164,10 +160,12 @@ class Game {
       if(currentSuit.includes(this.middlePile[length - 1]) && currentSuit.includes(this.middlePile[length - 2])) {
         cardsWon = this.middlePile.splice(0);
         this.players[0].hand = [...this.players[0].hand, ...cardsWon];
+        this.players[0].shufflePlayerDeck();
         return true;
       } else if(currentSuit.includes(this.middlePile[length - 1] && currentSuit.includes(this.middlePile[length - 2])) && this.whoSlapped === 1){
         cardsWon = this.middlePile.splice(0);
         this.players[1].hand = [...this.players[1].hand, ...cardsWon];
+        this.players[1].shufflePlayerDeck();
         return true;
       }
     }
@@ -180,10 +178,12 @@ class Game {
         if(currentSuit.includes(this.middlePile[length - 1]) && currentSuit.includes(this.middlePile[length - 3]) && this.whoSlapped === 0) {
           cardsWon = this.middlePile.splice(0);
           this.players[0].hand = [...this.players[0].hand, ...cardsWon];
+          this.players[0].shufflePlayerDeck();
           return true;
         } else if(suit.includes(this.middlePile[length - 1] && this.middlePile[length - 3]) && this.whoSlapped === 1) {
           cardsWon = this.middlePile.splice(0);
           this.players[1].hand = [...this.players[1].hand, ...cardsWon];
+          this.players[1].shufflePlayerDeck();
           return true;
         }
        }
