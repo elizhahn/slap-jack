@@ -79,6 +79,10 @@ function lastPlay(event) {
   //player 0
   if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
       currentGame.playCard();
+      if(playerHand0.length === 0) {
+       var cards = currentGame.middlePile.splice(0);
+       currentGame.players[0].hand = cards;
+     }
       currentGame.currentPlayer = 0
   } else if(event.keyCode === 70 && playerHand1.length === 0) {
       currentGame.whoSlapped = 0
@@ -86,6 +90,10 @@ function lastPlay(event) {
   //player 1
    else if (event.keyCode === 80 && currentGame.currentPlayer === 1) {
      currentGame.playCard();
+     if(playerHand1.length === 0) {
+        var cards = currentGame.middlePile.splice(0);
+        currentGame.players[1].hand = cards
+      }
        currentGame.currentPlayer = 1
   } else if (event.keyCode === 74 && playerHand0.length === 0) {
       currentGame.whoSlapped = 1;
