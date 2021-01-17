@@ -92,10 +92,8 @@ class Game {
   playCard() {
     if(this.currentPlayer === 0) {
       this.middlePile.push(this.players[0].playCard());
-      this.currentPlayer = 1;
     } else {
       this.middlePile.push(this.players[1].playCard());
-      this.currentPlayer = 0;
     }
     //update currentCard that is in play for the DOM
 // call updateMiddleCard();
