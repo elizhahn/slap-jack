@@ -91,6 +91,7 @@ function winningSlapPlayer0() {
   if(currentGame.slapJack()) {
     currentGame.players[0].wins++;
     saveGame();
+    gameReset(); 
   }
 };
 
@@ -99,6 +100,7 @@ function winningSlapPlayer1() {
     if(currentGame.slapJack()) {
       currentGame.players[0].wins++;
       saveGame();
+      gameReset();
     }
 };
 
@@ -119,6 +121,7 @@ function redemptionAttemptPlayer0() {
 } else {
     currentGame.players[1].wins++;
     saveGame();
+    gameReset();
   }
 };
 
@@ -129,6 +132,7 @@ function redemptionAttemptPlayer1() {
 } else {
     currentGame.players[0].wins++;
     saveGame();
+    gameReset();
   }
 };
 
