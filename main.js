@@ -20,6 +20,14 @@ function displayMiddleCard() {
    }
 }
 
+function switchPlayers() {
+  if(currentGame.currentPlayer === 0) {
+    currentGame.currentPlayer = 1;
+} else {
+    currentGame.currentPlayer = 0;
+}
+};
+
 function checkHand() {
   if(currentGame.players[0].hand.length === 0) {
     currentGame.currentPlayer = 1;
