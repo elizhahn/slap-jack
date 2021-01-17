@@ -1,25 +1,11 @@
 //DOM SELECTORS-----------------------------
 
 
-//EVENTLISTENERS------------------------------
-//resetting game on load
-  //pageload.addEventListner(load, resetGame);
-//playing a card
 document.addEventListener("keydown", playCard);
-//slapping a card
-  // document.addEventListern(keydown, slapCard)
+window.addEventListener("load", gameReset);
 
-//GLOBAL VARIABLES
-var player0 = new Player(0);
-var player1 = new Player(1);
-var currentGame = new Game([player0, player1]);
+var currentGame;
 
-currentGame.shuffleDeck();
-currentGame.dealCards();
-
-
-
-//EVENT HANDLERS-----------------------------
 function checkHand() {
   if(currentGame.players[0].hand.length === 0) {
     currentGame.currentPlayer = 1;
@@ -54,6 +40,9 @@ function validatePlayAction(event) {
 
 function playCard() {
   console.log("TEST");
+  if(!validatePlayAction(event)){
+    return;
+  }
   if(!checkHand()) {
     validatePlayAction(event);
     console.log(currentGame.middlePile);
@@ -101,6 +90,8 @@ function winningSlapPlayer0() {
   currentGame.whoSlapped = 0;
   if(currentGame.slapJack()) {
     currentGame.players[0].wins++;
+    saveGame();
+    gameReset(); 
   }
 };
 
@@ -108,6 +99,8 @@ function winningSlapPlayer1() {
   currentGame.whoSlapped = 1;
     if(currentGame.slapJack()) {
       currentGame.players[0].wins++;
+      saveGame();
+      gameReset();
     }
 };
 
@@ -127,6 +120,8 @@ function redemptionAttemptPlayer0() {
     currentGame.currentPlayer = 0;
 } else {
     currentGame.players[1].wins++;
+    saveGame();
+    gameReset();
   }
 };
 
@@ -136,5 +131,31 @@ function redemptionAttemptPlayer1() {
     currentGame.currentPlayer = 1;
 } else {
     currentGame.players[0].wins++;
+    saveGame();
+    gameReset();
   }
 };
+
+function gameReset() {
+  if(localStorage.length === 0) {
+    var player0 = new Player(0);
+    var player1 = new Player(1);
+    currentGame = new Game([player0, player1]);
+    currentGame.shuffleDeck();
+    currentGame.dealCards();
+ } else {
+    var savedPlayer0 = localStorage.getItem("0");
+    var savedPlayer1 = localStorage.getItem("1");
+    savedPlayer0 = JSON.parse(savedPlayer0);
+    savedPlayer1 = JSON.parse(savedPlayer1);
+    currentGame = new Game([savedPlayer0, savedPlayer1]);
+    currentGame.shuffleDeck();
+    currentGame.dealCards();
+ }
+};
+
+function saveGame() {
+  for(var i = 0; i < 2; i++) {
+    currentGame.players[i].saveToStorage();
+  }
+}
