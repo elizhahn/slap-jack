@@ -12,10 +12,11 @@ document.addEventListener("keydown", playCard);
 //GLOBAL VARIABLES
 var player0 = new Player(0);
 var player1 = new Player(1);
-var currentGame = new Game([player0, player1]);
+var currentGame = new Game([player0, player1])
 
 currentGame.shuffleDeck();
 currentGame.dealCards();
+
 
 
 
@@ -101,7 +102,7 @@ function winningSlapPlayer0() {
   currentGame.whoSlapped = 0;
   if(currentGame.slapJack()) {
     currentGame.players[0].wins++;
-    currentGame.players[0].saveToStorage();
+    saveGame();
   }
 };
 
@@ -109,7 +110,7 @@ function winningSlapPlayer1() {
   currentGame.whoSlapped = 1;
     if(currentGame.slapJack()) {
       currentGame.players[0].wins++;
-      currentGame.players[0].saveToStorage();
+      saveGame();
     }
 };
 
@@ -129,7 +130,7 @@ function redemptionAttemptPlayer0() {
     currentGame.currentPlayer = 0;
 } else {
     currentGame.players[1].wins++;
-    currentGame.players[1].saveToStorage();
+    saveGame();
   }
 };
 
@@ -139,6 +140,12 @@ function redemptionAttemptPlayer1() {
     currentGame.currentPlayer = 1;
 } else {
     currentGame.players[0].wins++;
-    currentGame.players[0].saveToStorage();
+    saveGame();
   }
 };
+
+function saveGame() {
+  for(var i = 0; i < 2; i++) {
+    currentGame.players[i].saveToStorage();
+  }
+}
