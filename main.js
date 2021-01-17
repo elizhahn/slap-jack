@@ -89,14 +89,16 @@ function lastPlay(event) {
       currentGame.whoSlapped = 0
       if(currentGame.slapJack()) {
         currentGame.players[0].wins++;
+      } else {
+        currentGame.invalidSlap();
       }
   }
   //player 1
    else if (event.keyCode === 80 && currentGame.currentPlayer === 1) {
      currentGame.playCard();
-     if(playerHand1.length === 0) {
-        var cards = currentGame.middlePile.splice(0);
-        currentGame.players[1].hand = cards
+       if(playerHand1.length === 0) {
+         var cards = currentGame.middlePile.splice(0);
+         currentGame.players[1].hand = cards
       }
        currentGame.players[1].shufflePlayerDeck();
        currentGame.currentPlayer = 1
@@ -104,8 +106,21 @@ function lastPlay(event) {
       currentGame.whoSlapped = 1;
         if(currentGame.slapJack()) {
           currentGame.players[0].wins++;
+        } else {
+          currentGame.invalidSlap();
         }
   } else {
     return false;
   }
 }
+
+// If losing player slaps a jacks
+function redemptionSlap(event) {
+  if(event.keycode === 70 && currentPlayer[0].hand === 0 && currentGame.slapJack()) {
+    var cardsWon = currentGame.middlePile.splice(0);
+    currentGame.players[0].hand = cards;
+  } else if(event.keycode === 74 && currentPlayer[1].hand === 0 && currentGame.slapJack()) {
+    var cardsWon = currentGame.middlePile.splice(0);
+    currentGame.players[1].hand = cards;
+  }
+  }
