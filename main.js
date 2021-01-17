@@ -87,6 +87,9 @@ function lastPlay(event) {
       currentGame.currentPlayer = 0
   } else if(event.keyCode === 70 && playerHand1.length === 0) {
       currentGame.whoSlapped = 0
+      if(currentGame.slapJack()) {
+        currentGame.players[0].wins++;
+      }
   }
   //player 1
    else if (event.keyCode === 80 && currentGame.currentPlayer === 1) {
@@ -99,6 +102,9 @@ function lastPlay(event) {
        currentGame.currentPlayer = 1
   } else if (event.keyCode === 74 && playerHand0.length === 0) {
       currentGame.whoSlapped = 1;
+        if(currentGame.slapJack()) {
+          currentGame.players[0].wins++;
+        }
   } else {
     return false;
   }
