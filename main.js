@@ -41,6 +41,9 @@ function checkHand() {
 
 //Function to validate and execute any play Action
 function validatePlayAction(event) {
+  if(event.keyCode !== 81 && event.keyCode !== 80 && event.keyCode !== 70 && event.keyCode !== 74) {
+    return false;
+  }
   if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
       currentGame.playCard();
       return true;
@@ -55,20 +58,18 @@ function validatePlayAction(event) {
       currentGame.whoSlapped = 1;
       currentGame.slap();
       return true;
-  } else {
-    return false;
   }
 };
 
 function playCard() {
   console.log("TEST");
-  // if(!validatePlayAction(event)){
-  //   return;
-  //}
-  if(!checkHand()) {
-    validatePlayAction(event);
+  if(!validatePlayAction(event)){
+    return;
+  }
+  else if(!checkHand()) {
     displayMiddleCard()
     show(middlePile);
+    switchPlayers();
     console.log(currentGame.middlePile);
 } else {
   lastPlay(event);
