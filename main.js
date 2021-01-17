@@ -101,6 +101,7 @@ function winningSlapPlayer0() {
   currentGame.whoSlapped = 0;
   if(currentGame.slapJack()) {
     currentGame.players[0].wins++;
+    currentGame.players[0].saveToStorage();
   }
 };
 
@@ -108,6 +109,7 @@ function winningSlapPlayer1() {
   currentGame.whoSlapped = 1;
     if(currentGame.slapJack()) {
       currentGame.players[0].wins++;
+      currentGame.players[0].saveToStorage();
     }
 };
 
@@ -127,6 +129,7 @@ function redemptionAttemptPlayer0() {
     currentGame.currentPlayer = 0;
 } else {
     currentGame.players[1].wins++;
+    currentGame.players[1].saveToStorage();
   }
 };
 
@@ -136,5 +139,6 @@ function redemptionAttemptPlayer1() {
     currentGame.currentPlayer = 1;
 } else {
     currentGame.players[0].wins++;
+    currentGame.players[0].saveToStorage();
   }
 };
