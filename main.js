@@ -1,14 +1,9 @@
 //DOM SELECTORS-----------------------------
 
 
-//EVENTLISTENERS------------------------------
-//resetting game on load
-  //pageload.addEventListner(load, resetGame);
-//playing a card
 document.addEventListener("keydown", playCard);
 window.addEventListener("load", gameReset);
 
-//GLOBAL VARIABLES
 var currentGame;
 
 function gameReset() {
@@ -29,8 +24,6 @@ function gameReset() {
  }
 };
 
-
-//EVENT HANDLERS-----------------------------
 function checkHand() {
   if(currentGame.players[0].hand.length === 0) {
     currentGame.currentPlayer = 1;
