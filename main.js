@@ -6,18 +6,28 @@
   //pageload.addEventListner(load, resetGame);
 //playing a card
 document.addEventListener("keydown", playCard);
-//slapping a card
-  // document.addEventListern(keydown, slapCard)
+window.addEventListener("load", gameReset);
 
 //GLOBAL VARIABLES
-var player0 = new Player(0);
-var player1 = new Player(1);
-var currentGame = new Game([player0, player1])
+var currentGame;
 
-currentGame.shuffleDeck();
-currentGame.dealCards();
-
-
+function gameReset() {
+  if(localStorage.length === 0) {
+    var player0 = new Player(0);
+    var player1 = new Player(1);
+    currentGame = new Game([player0, player1]);
+    currentGame.shuffleDeck();
+    currentGame.dealCards();
+ } else {
+    var savedPlayer0 = localStorage.getItem("0");
+    var savedPlayer1 = localStorage.getItem("1");
+    savedPlayer0 = JSON.parse(savedPlayer0);
+    savedPlayer1 = JSON.parse(savedPlayer1);
+    currentGame = new Game([savedPlayer0, savedPlayer1]);
+    currentGame.shuffleDeck();
+    currentGame.dealCards();
+ }
+};
 
 
 //EVENT HANDLERS-----------------------------
@@ -55,6 +65,9 @@ function validatePlayAction(event) {
 
 function playCard() {
   console.log("TEST");
+  if(!validatePlayAction(event)){
+    return;
+  }
   if(!checkHand()) {
     validatePlayAction(event);
     console.log(currentGame.middlePile);
