@@ -41,19 +41,20 @@ function checkHand() {
 
 //Function to validate and execute any play Action
 function validatePlayAction(event) {
-  if(event.keyCode !== 81 && event.keyCode !== 80 && event.keyCode !== 70 && event.keyCode !== 74) {
-    return false;
-  }
   if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
       currentGame.playCard();
-      return true;
+      displayMiddleCard()
+      show(middlePile);
+      switchPlayers();
   } else if(event.keyCode === 70) {
       currentGame.whoSlapped = 0;
       currentGame.slap();
       return true;
   } else if (event.keyCode === 80 && currentGame.currentPlayer === 1) {
      currentGame.playCard();
-      return true;
+     displayMiddleCard()
+     show(middlePile);
+     switchPlayers();
   } else if (event.keyCode === 74) {
       currentGame.whoSlapped = 1;
       currentGame.slap();
@@ -63,13 +64,11 @@ function validatePlayAction(event) {
 
 function playCard() {
   console.log("TEST");
-  if(!validatePlayAction(event)){
+  if(event.keyCode !== 81 && event.keyCode !== 80 && event.keyCode !== 70 && event.keyCode !== 74) {
     return;
   }
   else if(!checkHand()) {
-    displayMiddleCard()
-    show(middlePile);
-    switchPlayers();
+    validatePlayAction(event);
     console.log(currentGame.middlePile);
 } else {
   lastPlay(event);
