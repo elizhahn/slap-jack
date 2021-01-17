@@ -1,10 +1,32 @@
 //DOM SELECTORS-----------------------------
-
+var middlePile = document.getElementById("middle-pile");
+var currentCard = document.getElementById("current-card");
 
 document.addEventListener("keydown", playCard);
 window.addEventListener("load", gameReset);
 
 var currentGame;
+
+function show(feature) {
+  feature.classList.remove("hidden");
+}
+
+function displayMiddleCard() {
+  var currentCard = currentGame.middlePile[currentGame.middlePile.length - 1];
+    if(currentGame.currentPlayer === 0) {
+      middlePile.innerHTML = `<img class="player-cards middle-card-player-1" src="${currentCard}" id="current-card">`
+   } else {
+      middlePile.innerHTML = `<img class="player-cards middle-card-player-2" src="${currentCard}" id="current-card">`
+   }
+}
+
+function switchPlayers() {
+  if(currentGame.currentPlayer === 0) {
+    currentGame.currentPlayer = 1;
+} else {
+    currentGame.currentPlayer = 0;
+}
+};
 
 function checkHand() {
   if(currentGame.players[0].hand.length === 0) {
@@ -19,6 +41,9 @@ function checkHand() {
 
 //Function to validate and execute any play Action
 function validatePlayAction(event) {
+  if(event.keyCode !== 81 && event.keyCode !== 80 && event.keyCode !== 70 && event.keyCode !== 74) {
+    return false;
+  }
   if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
       currentGame.playCard();
       return true;
@@ -33,8 +58,6 @@ function validatePlayAction(event) {
       currentGame.whoSlapped = 1;
       currentGame.slap();
       return true;
-  } else {
-    return false;
   }
 };
 
@@ -43,8 +66,10 @@ function playCard() {
   if(!validatePlayAction(event)){
     return;
   }
-  if(!checkHand()) {
-    validatePlayAction(event);
+  else if(!checkHand()) {
+    displayMiddleCard()
+    show(middlePile);
+    switchPlayers();
     console.log(currentGame.middlePile);
 } else {
   lastPlay(event);
@@ -72,6 +97,7 @@ function winnerDealsPlayer0() {
        currentGame.players[0].hand = cardsWon;
        currentGame.players[0].shufflePlayerDeck();
     }
+  //can refactor this out maybe
   currentGame.currentPlayer = 0;
 };
 
@@ -83,6 +109,7 @@ function winnerDealsPlayer1() {
       currentGame.players[1].hand = cardsWon;
       currentGame.players[1].shufflePlayerDeck();
     }
+  //can refactor this out maybe
   currentGame.currentPlayer = 1;
 };
 
@@ -91,7 +118,7 @@ function winningSlapPlayer0() {
   if(currentGame.slapJack()) {
     currentGame.players[0].wins++;
     saveGame();
-    gameReset(); 
+    gameReset();
   }
 };
 
