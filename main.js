@@ -1,5 +1,6 @@
 //DOM SELECTORS-----------------------------
-
+var middlePile = document.getElementById("middle-pile");
+var currentCard = document.getElementById("current-card"); 
 
 document.addEventListener("keydown", playCard);
 window.addEventListener("load", gameReset);
@@ -91,7 +92,7 @@ function winningSlapPlayer0() {
   if(currentGame.slapJack()) {
     currentGame.players[0].wins++;
     saveGame();
-    gameReset(); 
+    gameReset();
   }
 };
 
