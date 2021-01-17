@@ -1,11 +1,24 @@
 //DOM SELECTORS-----------------------------
 var middlePile = document.getElementById("middle-pile");
-var currentCard = document.getElementById("current-card"); 
+var currentCard = document.getElementById("current-card");
 
 document.addEventListener("keydown", playCard);
 window.addEventListener("load", gameReset);
 
 var currentGame;
+
+function show(feature) {
+  feature.classList.remove("hidden");
+}
+
+function displayMiddleCard() {
+  var currentCard = currentGame.middlePile[currentGame.middlePile.length - 1];
+    if(currentGame.currentPlayer === 0) {
+      middlePile.innerHTML = `<img class="player-cards middle-card-player-1" src="${currentCard}" id="current-card">`
+   } else {
+      middlePile.innerHTML = `<img class="player-cards middle-card-player-2" src="${currentCard}" id="current-card">`
+   }
+}
 
 function checkHand() {
   if(currentGame.players[0].hand.length === 0) {
@@ -41,11 +54,13 @@ function validatePlayAction(event) {
 
 function playCard() {
   console.log("TEST");
-  if(!validatePlayAction(event)){
-    return;
-  }
+  // if(!validatePlayAction(event)){
+  //   return;
+  //}
   if(!checkHand()) {
     validatePlayAction(event);
+    displayMiddleCard()
+    show(middlePile);
     console.log(currentGame.middlePile);
 } else {
   lastPlay(event);
@@ -73,6 +88,7 @@ function winnerDealsPlayer0() {
        currentGame.players[0].hand = cardsWon;
        currentGame.players[0].shufflePlayerDeck();
     }
+  //can refactor this out maybe
   currentGame.currentPlayer = 0;
 };
 
@@ -84,6 +100,7 @@ function winnerDealsPlayer1() {
       currentGame.players[1].hand = cardsWon;
       currentGame.players[1].shufflePlayerDeck();
     }
+  //can refactor this out maybe
   currentGame.currentPlayer = 1;
 };
 
