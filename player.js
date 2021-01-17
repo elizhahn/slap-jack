@@ -1,4 +1,3 @@
-
 class Player {
   constructor(id) {
     this.hand = [];
@@ -24,6 +23,6 @@ class Player {
       var randomCard = this.hand.splice(index, 1);
       shuffledCards.push(randomCard[0])
   }
-    this.hand = shuffledCards; 
+    this.hand = shuffledCards;
  }
 }
