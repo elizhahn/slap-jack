@@ -194,8 +194,6 @@ function winnerDealsPlayer1() {
        currentGame.players[0].hand = cardsWon;
        currentGame.players[0].shufflePlayerDeck();
     }
-  //can refactor this out maybe
-  currentGame.currentPlayer = 1;
 };
 
 function winnerDealsPlayer2() {
@@ -208,8 +206,6 @@ function winnerDealsPlayer2() {
       currentGame.players[1].hand = cardsWon;
       currentGame.players[1].shufflePlayerDeck();
     }
-  //can refactor this out maybe
-  currentGame.currentPlayer = 2;
 };
 
 function winningSlapPlayer1() {
