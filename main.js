@@ -1,11 +1,13 @@
 //DOM SELECTORS-----------------------------
 var middlePile = document.getElementById("middle-pile");
 var currentCard = document.getElementById("current-card");
+var message = document.getElementById("message");
+
+var currentGame;
 
 document.addEventListener("keydown", playCard);
 window.addEventListener("load", gameReset);
 
-var currentGame;
 
 function show(feature) {
   feature.classList.remove("hidden");
@@ -22,6 +24,19 @@ function displayMiddleCard() {
       middlePile.innerHTML = `<img class="player-cards middle-card-player-2" src="${currentCard}" id="current-card">`
    }
 }
+
+function displaySlapMessage() {
+  var slaps = ["jack", "double", "sandwich"];
+    for(var i = 0; i < slaps.length; i++){
+      if(currentGame.slapType === slaps[i]){
+        message.innerText = `${slaps[i].toUpperCase()}! Player ${currentGame.whoSlapped + 1} takes the pile!`
+    } else if(currentGame.slapType === "invalid" && currentGame.whoSlapped === 0) {
+        message.innerText = "INVALID SLAP! Player 1 forfeits a card to Player 2!"
+    } else if(currentGame.slapType === "invalid" && currentGame.whoSlapped === 1) {
+        message.innerText = "INVALID SLAP! Player 2 forfeits a card to Player 1"
+    }
+  };
+};
 
 function switchPlayers() {
   if(currentGame.currentPlayer === 0) {
@@ -53,6 +68,7 @@ function validatePlayAction(event) {
       currentGame.whoSlapped = 0;
       if(currentGame.slap()){
         hide(middlePile);
+        displaySlapMessage();
       }
       return true;
   } else if (event.keyCode === 80 && currentGame.currentPlayer === 1) {
@@ -63,7 +79,8 @@ function validatePlayAction(event) {
   } else if (event.keyCode === 74) {
       currentGame.whoSlapped = 1;
       if(currentGame.slap()) {
-        hide(middlePile); 
+        hide(middlePile);
+        displaySlapMessage();
       }
       return true;
   }
