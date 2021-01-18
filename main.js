@@ -27,19 +27,19 @@ function displayMiddleCard() {
    }
 }
 
-function displaySlapMessage() {
+//Refactor displaySlapMessage()
+function displaySlapMessage(player) {
   show(message);
   var slaps = ["jack", "double", "sandwich"];
-    for(var i = 0; i < slaps.length; i++){
-      if(currentGame.slapType === slaps[i]){
-        message.innerText = `${slaps[i].toUpperCase()}! Player ${currentGame.whoSlapped} takes the pile!`
-    } else if(currentGame.slapType === "invalid" && currentGame.whoSlapped === 1) {
-        message.innerText = "INVALID SLAP! Player 1 forfeits a card to Player 2!"
-    } else if(currentGame.slapType === "invalid" && currentGame.whoSlapped === 2) {
-        message.innerText = "INVALID SLAP! Player 2 forfeits a card to Player 1"
+  for(var i = 0; i < slaps.length; i++) {
+    if(currentGame.slapType === slaps[i]) {
+      message.innerText = `${slaps[i]}! Player ${currentGame.whoSlapped} takes the pile!`
     }
   };
-};
+  if(currentGame.slapType === "invalid") {
+  message.innerText = `INVALID SLAP! Player ${currentGame.whoSlapped} forfeits a card to ${player}!`
+  }
+}
 
 function switchPlayers() {
   if(currentGame.currentPlayer === 1) {
@@ -104,9 +104,9 @@ function validateSlapCard1() {
   currentGame.whoSlapped = 1;
     if(currentGame.slap()) {
       hide(middlePile);
-      displaySlapMessage();
+      displaySlapMessage("player 2");
   } else {
-      displaySlapMessage();
+      displaySlapMessage("player 2");
     }
 };
 
@@ -121,9 +121,9 @@ function validateSlapCard2() {
   currentGame.whoSlapped = 2;
     if(currentGame.slap()) {
       hide(middlePile);
-      displaySlapMessage();
+      displaySlapMessage("player 1");
     } else {
-      displaySlapMessage();
+      displaySlapMessage("player 1");
     }
 };
 
