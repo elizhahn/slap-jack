@@ -22,7 +22,8 @@ h1 {
   font-style: italic;
   font-size: 2.3em;
   text-shadow: #fff 1px 0px 10px;
-  margin-top: 20px;
+  margin-top: 10px;
+  height: 50px;
 }
 
 
@@ -36,7 +37,7 @@ h1 {
 
 .game-card-pile {
   height: 100%;
-  flex: 1; 
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
