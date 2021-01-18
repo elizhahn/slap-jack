@@ -10,7 +10,7 @@ document.addEventListener("keydown", playCard);
 window.addEventListener("load", gameReset);
 
 
-function show(feature) {
+function display(feature) {
   feature.classList.remove("hidden");
 }
 function hide(feature) {
@@ -59,11 +59,11 @@ function hidePlayerPile() {
 
 function showRedemptionMessage(player) {
   message.innerText = `REDEMPTION! ${player} back in the game!!`;
-  show(message);
+  display(message);
 }
 
 function showWinningMessage(slapType, player) {
-  show(message);
+  display(message);
   message.innerText = `${slapType}! ${player} wins!!`;
   hide(middlePile);
 }
@@ -113,7 +113,7 @@ function validateSlapCard1() {
 function validatePlayCard2() {
    currentGame.playCard();
    displayMiddleCard()
-   show(middlePile);
+   display(middlePile);
    switchPlayers();
 }
 
@@ -216,7 +216,7 @@ function redemptionSlap(event) {
 function redemptionAttemptPlayer1() {
   currentGame.whoSlapped = 1;
   if(currentGame.slapJack()) {
-    show(playerPile1);
+    display(playerPile1);
     showRedemptionMessage("player 1");
     currentGame.currentPlayer = 1;
 } else {
@@ -230,7 +230,7 @@ function redemptionAttemptPlayer1() {
 function redemptionAttemptPlayer2() {
   currentGame.whoSlapped = 2;
   if(currentGame.slapJack()) {
-    show(playerPile1);
+    display(playerPile1);
     showRedemptionMessage("player 2");
     currentGame.currentPlayer = 2;
 } else {
