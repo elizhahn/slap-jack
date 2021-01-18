@@ -3,7 +3,7 @@ var middlePile = document.getElementById("middle-pile");
 var currentCard = document.getElementById("current-card");
 var message = document.getElementById("message");
 var playerPile1 = document.getElementById("player1");
-var playerPile2 = document.getElementById("player1");
+var playerPile2 = document.getElementById("player2");
 var currentGame;
 
 document.addEventListener("keydown", playCard);
@@ -48,16 +48,15 @@ function switchPlayers() {
 }
 };
 
-function checkPlayerHand() {
-  if(currentGame.players[0].hand.length === 1){
+function hidePlayerPile() {
+  if(currentGame.players[0].hand.length === 0){
     hide(playerPile1);
-} else if(currentGame.players[1].hand.length === 1){
+} else if(currentGame.players[1].hand.length === 0){
    hide(playerPile2);
 }
 };
 
 function checkEmptyHand() {
-  checkPlayerHand();
   if(currentGame.players[0].hand.length === 0)
   if(currentGame.players[0].hand.length === 0) {
     currentGame.currentPlayer = 1;
@@ -109,6 +108,7 @@ function playCard() {
   else if(!checkEmptyHand()) {
     hide(message);
     validatePlayAction(event);
+    hidePlayerPile(); 
     console.log(currentGame.middlePile);
 } else {
   lastPlay(event);
