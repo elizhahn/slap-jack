@@ -196,6 +196,7 @@ function winningSlapPlayer1() {
     currentGame.players[0].wins++;
     saveGame();
     gameReset();
+    pageRefresh();
   }
 };
 
@@ -206,6 +207,7 @@ function winningSlapPlayer2() {
       currentGame.players[1].wins++;
       saveGame();
       gameReset();
+      pageRefresh();
     }
 };
 
@@ -230,6 +232,7 @@ function redemptionAttemptPlayer1() {
     currentGame.players[1].wins++;
     saveGame();
     gameReset();
+    pageRefresh();
   }
 };
 
@@ -244,8 +247,15 @@ function redemptionAttemptPlayer2() {
     currentGame.players[0].wins++;
     saveGame();
     gameReset();
+    pageRefresh(); 
   }
 };
+
+function pageRefresh() {
+  setTimeout(function() {
+    window.location.reload();
+  }, 3000);
+}
 
 function gameReset() {
   if(localStorage.length === 0) {
@@ -260,9 +270,6 @@ function gameReset() {
  }
 };
 
-// function pageRefresh() {
-//   window.location.reload();
-// };
 
 function playAgain() {
   var savedPlayer1 = localStorage.getItem("1");
