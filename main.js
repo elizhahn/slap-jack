@@ -17,6 +17,14 @@ function hide(feature) {
   feature.classList.add("hidden");
 }
 
+function hidePlayerPile() {
+  if(currentGame.players[0].hand.length === 0) {
+    hide(playerPile1);
+} else if(currentGame.players[1].hand.length === 0) {
+    hide(playerPile2);
+}
+};
+
 function createAltText() {
   for(var suit in currentGame.suits) {
     var currentSuit = currentGame.suits[suit];
@@ -50,22 +58,6 @@ function displaySlapMessage(player) {
   }
 };
 
-function switchPlayers() {
-  if(currentGame.currentPlayer === 1) {
-    currentGame.currentPlayer = 2;
-} else {
-    currentGame.currentPlayer = 1;
-}
-};
-
-function hidePlayerPile() {
-  if(currentGame.players[0].hand.length === 0) {
-    hide(playerPile1);
-} else if(currentGame.players[1].hand.length === 0) {
-    hide(playerPile2);
-}
-};
-
 function displayRedemptionMessage(player) {
   message.innerText = `REDEMPTION! ${player} back in the game!!`;
   display(message);
@@ -93,6 +85,32 @@ function checkEmptyHand() {
   return false;
 };
 
+function checkMiddlePile() {
+  if(currentGame.middlePile.length === 0) {
+    return true;
+  }
+};
+
+function switchPlayers() {
+  if(currentGame.currentPlayer === 1) {
+    currentGame.currentPlayer = 2;
+} else {
+    currentGame.currentPlayer = 1;
+}
+};
+
+function playCard() {
+  if(event.keyCode !== 81 && event.keyCode !== 80 && event.keyCode !== 70 && event.keyCode !== 74) {
+    return;
+  }
+  else if(!checkEmptyHand()) {
+    validatePlayAction(event);
+    hidePlayerPile();
+} else {
+  lastPlay(event);
+}
+};
+
 function validatePlayAction(event) {
   if(event.keyCode === 81 && currentGame.currentPlayer === 1) {
     validatePlayCard1();
@@ -102,12 +120,6 @@ function validatePlayAction(event) {
     validatePlayCard2();
   } else if (event.keyCode === 74) {
     validateSlapCard2();
-  }
-};
-
-function checkMiddlePile() {
-  if(currentGame.middlePile.length === 0) {
-    return true;
   }
 };
 
@@ -149,18 +161,6 @@ function validateSlapCard2() {
     displaySlapMessage("player 1");
 } else {
     displaySlapMessage("player 1");
-}
-};
-
-function playCard() {
-  if(event.keyCode !== 81 && event.keyCode !== 80 && event.keyCode !== 70 && event.keyCode !== 74) {
-    return;
-  }
-  else if(!checkEmptyHand()) {
-    validatePlayAction(event);
-    hidePlayerPile();
-} else {
-  lastPlay(event);
 }
 };
 
@@ -275,10 +275,10 @@ function redemptionAttemptPlayer2() {
   }
 };
 
-function pageRefresh() {
-  setTimeout(function() {
-    window.location.reload();
-  }, 3000);
+function saveGame() {
+  for(var i = 0; i < 2; i++) {
+    currentGame.players[i].saveToStorage();
+  }
 };
 
 function gameReset() {
@@ -307,8 +307,8 @@ function playAgain() {
   currentGame.dealCards();
 };
 
-function saveGame() {
-  for(var i = 0; i < 2; i++) {
-    currentGame.players[i].saveToStorage();
-  }
+function pageRefresh() {
+  setTimeout(function() {
+    window.location.reload();
+  }, 3000);
 };
