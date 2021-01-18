@@ -69,6 +69,8 @@ function validatePlayAction(event) {
       if(currentGame.slap()){
         hide(middlePile);
         displaySlapMessage();
+      } else {
+        displaySlapMessage(); 
       }
       return true;
   } else if (event.keyCode === 80 && currentGame.currentPlayer === 1) {
@@ -80,6 +82,8 @@ function validatePlayAction(event) {
       currentGame.whoSlapped = 1;
       if(currentGame.slap()) {
         hide(middlePile);
+        displaySlapMessage();
+      } else {
         displaySlapMessage();
       }
       return true;
