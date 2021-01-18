@@ -71,8 +71,9 @@ class Game {
     }
     this.players = players;
     this.currentPlayer = 0;
-    this.whoSlapped = 0;
     this.middlePile = [];
+    this.whoSlapped = 0;
+    this.slapType;
   }
   shuffleDeck() {
     var shuffledCards = [];
@@ -116,13 +117,17 @@ class Game {
     //this method, use the true/false returns to use in the DOM.
 
       if(this.slapJack()) {
+        this.slapType = "jack";
         return true;
     } else if(this.slapDouble()) {
+        this.slapType = "double";
         return true;
     } else if(this.slapSandwich()) {
+        this.slapType = "sandwich";
         return true;
     } else {
         this.invalidSlap();
+        this.slapType = "invalid"; 
         return false;
     }
   };
