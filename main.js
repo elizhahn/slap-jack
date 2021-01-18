@@ -4,6 +4,8 @@ var currentCard = document.getElementById("current-card");
 var message = document.getElementById("message");
 var playerPile1 = document.getElementById("player1");
 var playerPile2 = document.getElementById("player2");
+var playerWins1 = document.getElementById("player-1-wins");
+var playerWins2 = document.getElementById("player-2-wins");
 var currentGame;
 
 document.addEventListener("keydown", playCard);
@@ -65,6 +67,11 @@ function displayWinningMessage(slapType, player) {
   display(message);
   message.innerText = `${slapType}! ${player} wins!!`;
   hide(middlePile);
+}
+
+function displayPlayerWins() {
+  playerWins1.innerText = `${currentGame.players[0].wins} Wins`;
+  playerWins2.innerText = `${currentGame.players[1].wins} Wins`;
 }
 
 
@@ -196,7 +203,7 @@ function winningSlapPlayer2() {
   currentGame.whoSlapped = 2;
     if(currentGame.slapJack()) {
       displayWinningMessage("SLAPJACK", "player 2");
-      currentGame.players[0].wins++;
+      currentGame.players[1].wins++;
       saveGame();
       gameReset();
     }
@@ -245,12 +252,17 @@ function gameReset() {
     var player1 = new Player(0, 1);
     var player2 = new Player(0, 2);
     currentGame = new Game([player1, player2]);
+    displayPlayerWins();
     currentGame.shuffleDeck();
     currentGame.dealCards();
  } else {
     playAgain();
  }
 };
+
+// function pageRefresh() {
+//   window.location.reload();
+// };
 
 function playAgain() {
   var savedPlayer1 = localStorage.getItem("1");
@@ -260,6 +272,7 @@ function playAgain() {
   savedPlayer1 = new Player(savedPlayer1.wins, 1);
   savedPlayer2 = new Player(savedPlayer2.wins, 2);
   currentGame = new Game([savedPlayer1, savedPlayer2]);
+  displayPlayerWins();
   currentGame.shuffleDeck();
   currentGame.dealCards();
 }
