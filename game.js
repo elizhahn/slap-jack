@@ -175,7 +175,7 @@ class Game {
               this.players[0].hand = [...this.players[0].hand, ...cardsWon];
               this.players[0].shufflePlayerDeck();
               return true;
-            } else if(currentSuit.includes(this.middlePile[length - 1] && currentSuit.includes(this.middlePile[length - 3])) && this.whoSlapped === 2) {
+            } else if(currentSuit.includes(this.middlePile[length - 1]) && currentSuit.includes(this.middlePile[length - 3]) && this.whoSlapped === 2) {
               cardsWon = this.middlePile.splice(0);
               this.players[1].hand = [...this.players[1].hand, ...cardsWon];
               this.players[1].shufflePlayerDeck();
