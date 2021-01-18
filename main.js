@@ -243,9 +243,9 @@ function redemptionAttemptPlayer2() {
 
 function gameReset() {
   if(localStorage.length === 0) {
-    var player0 = new Player(0, 0);
     var player1 = new Player(0, 1);
-    currentGame = new Game([player0, player1]);
+    var player2 = new Player(0, 2);
+    currentGame = new Game([player1, player2]);
     currentGame.shuffleDeck();
     currentGame.dealCards();
  } else {
@@ -254,13 +254,13 @@ function gameReset() {
 };
 
 function playAgain() {
-  var savedPlayer0 = localStorage.getItem("0");
   var savedPlayer1 = localStorage.getItem("1");
-  savedPlayer0 = JSON.parse(savedPlayer0);
+  var savedPlayer2 = localStorage.getItem("2");
   savedPlayer1 = JSON.parse(savedPlayer1);
-  savedPlayer0 = new Player(savedPlayer0.wins, 0);
+  savedPlayer2 = JSON.parse(savedPlayer2);
   savedPlayer1 = new Player(savedPlayer1.wins, 1);
-  currentGame = new Game([savedPlayer0, savedPlayer1]);
+  savedPlayer2 = new Player(savedPlayer2.wins, 2);
+  currentGame = new Game([savedPlayer1, savedPlayer2]);
   currentGame.shuffleDeck();
   currentGame.dealCards();
 }
