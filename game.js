@@ -97,23 +97,21 @@ class Game {
       this.middlePile.push(this.players[1].playCard());
     }
   };
-
-
   slap() {
-      if(this.slapJack()) {
+    if(this.slapJack()) {
         this.slapType = "JACK";
         return true;
-    } else if(this.slapDouble()) {
+  } else if(this.slapDouble()) {
         this.slapType = "DOUBLE";
         return true;
-    } else if(this.slapSandwich()) {
+  } else if(this.slapSandwich()) {
         this.slapType = "SANDWICH";
         return true;
-    } else {
+  } else {
         this.invalidSlap();
         this.slapType = "INVALID";
         return false;
-    }
+  }
   };
     slapJack() {
       var lastCard = this.middlePile[this.middlePile.length - 1];
@@ -124,12 +122,12 @@ class Game {
           this.players[0].hand = [...this.players[0].hand, ...cardsWon];
           this.players[0].shufflePlayerDeck();
           return true;
-        } else if(jacks.includes(lastCard) && this.whoSlapped === 2) {
+      } else if(jacks.includes(lastCard) && this.whoSlapped === 2) {
           cardsWon = this.middlePile.splice(0);
           this.players[1].hand = [...this.players[1].hand, ...cardsWon];
           this.players[1].shufflePlayerDeck();
           return true;
-        }
+      }
     };
     slapDouble() {
       var cardsWon;
@@ -147,7 +145,7 @@ class Game {
               this.players[1].shufflePlayerDeck();
               return true;
             }
-          };
+         };
      };
      slapSandwich(){
       var cardsWon;
@@ -159,13 +157,13 @@ class Game {
               this.players[0].hand = [...this.players[0].hand, ...cardsWon];
               this.players[0].shufflePlayerDeck();
               return true;
-            } else if(currentSuit.includes(this.middlePile[length - 1]) && currentSuit.includes(this.middlePile[length - 3]) && this.whoSlapped === 2) {
+          } else if(currentSuit.includes(this.middlePile[length - 1]) && currentSuit.includes(this.middlePile[length - 3]) && this.whoSlapped === 2) {
               cardsWon = this.middlePile.splice(0);
               this.players[1].hand = [...this.players[1].hand, ...cardsWon];
               this.players[1].shufflePlayerDeck();
               return true;
-            }
-         };
+          }
+        };
       };
       invalidSlap() {
         if(this.whoSlapped === 1) {
