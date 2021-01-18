@@ -18,7 +18,7 @@ function hide(feature) {
 }
 
 function displayMiddleCard() {
-  show(middlePile); 
+  show(middlePile);
   var currentCard = currentGame.middlePile[currentGame.middlePile.length - 1];
     if(currentGame.currentPlayer === 0) {
       middlePile.innerHTML = `<img class="player-cards middle-card-player-1" src="${currentCard}" id="current-card">`
@@ -82,35 +82,45 @@ function checkEmptyHand() {
 
 //Function to validate and execute any play Action
 function validatePlayAction(event) {
+  validatePlayAction1(event);
+  validatePlayAction2(event);
+};
+
+//Refactor validatePlayAction
+function validatePlayAction1(event) {
   if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
       currentGame.playCard();
       displayMiddleCard()
       switchPlayers();
   } else if(event.keyCode === 70) {
       currentGame.whoSlapped = 0;
-      if(currentGame.slap()){
-        hide(middlePile);
-        displaySlapMessage();
-      } else {
-        displaySlapMessage();
-      }
+        if(currentGame.slap()){
+          hide(middlePile);
+          displaySlapMessage();
+        } else {
+          displaySlapMessage();
+        }
       return true;
-  } else if (event.keyCode === 80 && currentGame.currentPlayer === 1) {
+}
+}
+
+function validatePlayAction2(event) {
+  if (event.keyCode === 80 && currentGame.currentPlayer === 1) {
      currentGame.playCard();
      displayMiddleCard()
      show(middlePile);
      switchPlayers();
   } else if (event.keyCode === 74) {
       currentGame.whoSlapped = 1;
-      if(currentGame.slap()) {
-        hide(middlePile);
-        displaySlapMessage();
-      } else {
-        displaySlapMessage();
-      }
+        if(currentGame.slap()) {
+          hide(middlePile);
+          displaySlapMessage();
+        } else {
+          displaySlapMessage();
+        }
       return true;
   }
-};
+}
 
 function playCard() {
   if(event.keyCode !== 81 && event.keyCode !== 80 && event.keyCode !== 70 && event.keyCode !== 74) {
