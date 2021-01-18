@@ -118,6 +118,7 @@ function checkMiddlePile() {
 //Refactor validatePlayAction
 function validatePlayCard1() {
   currentGame.playCard();
+  hide(message);
   displayMiddleCard();
   switchPlayers();
 }
@@ -137,6 +138,7 @@ function validateSlapCard1() {
 
 function validatePlayCard2() {
    currentGame.playCard();
+   hide(message);
    displayMiddleCard()
    display(middlePile);
    switchPlayers();
@@ -144,7 +146,7 @@ function validatePlayCard2() {
 
 function validateSlapCard2() {
   if(checkMiddlePile()) {
-    return; 
+    return;
   }
   currentGame.whoSlapped = 2;
     if(currentGame.slap()) {
@@ -161,7 +163,6 @@ function playCard() {
     return;
   }
   else if(!checkEmptyHand()) {
-    hide(message);
     validatePlayAction(event);
     hidePlayerPile();
     console.log(currentGame.middlePile);
