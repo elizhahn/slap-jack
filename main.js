@@ -18,7 +18,7 @@ function hide(feature) {
 }
 
 function displayMiddleCard() {
-  show(middlePile); 
+  show(middlePile);
   var currentCard = currentGame.middlePile[currentGame.middlePile.length - 1];
     if(currentGame.currentPlayer === 0) {
       middlePile.innerHTML = `<img class="player-cards middle-card-player-1" src="${currentCard}" id="current-card">`
@@ -83,34 +83,50 @@ function checkEmptyHand() {
 //Function to validate and execute any play Action
 function validatePlayAction(event) {
   if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
-      currentGame.playCard();
-      displayMiddleCard()
-      switchPlayers();
+    validatePlayCard1();
   } else if(event.keyCode === 70) {
-      currentGame.whoSlapped = 0;
-      if(currentGame.slap()){
-        hide(middlePile);
-        displaySlapMessage();
-      } else {
-        displaySlapMessage();
-      }
-      return true;
-  } else if (event.keyCode === 80 && currentGame.currentPlayer === 1) {
-     currentGame.playCard();
-     displayMiddleCard()
-     show(middlePile);
-     switchPlayers();
-  } else if (event.keyCode === 74) {
-      currentGame.whoSlapped = 1;
-      if(currentGame.slap()) {
-        hide(middlePile);
-        displaySlapMessage();
-      } else {
-        displaySlapMessage();
-      }
-      return true;
+    validateSlapCard1();
+  } else if(event.keyCode === 80 && currentGame.currentPlayer === 1) {
+    validatePlayCard2();
+  } else if (event.keyCode === 74){
+    validateSlapCard2(); 
   }
 };
+
+//Refactor validatePlayAction
+function validatePlayCard1() {
+  currentGame.playCard();
+  displayMiddleCard();
+  switchPlayers();
+}
+
+function validateSlapCard1() {
+  currentGame.whoSlapped = 0;
+    if(currentGame.slap()) {
+      hide(middlePile);
+      displaySlapMessage();
+  } else {
+      displaySlapMessage();
+    }
+};
+
+function validatePlayCard2() {
+   currentGame.playCard();
+   displayMiddleCard()
+   show(middlePile);
+   switchPlayers();
+}
+
+function validateSlapCard2() {
+  currentGame.whoSlapped = 1;
+    if(currentGame.slap()) {
+      hide(middlePile);
+      displaySlapMessage();
+    } else {
+      displaySlapMessage();
+    }
+};
+
 
 function playCard() {
   if(event.keyCode !== 81 && event.keyCode !== 80 && event.keyCode !== 70 && event.keyCode !== 74) {
