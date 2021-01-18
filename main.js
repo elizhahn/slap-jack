@@ -30,13 +30,13 @@ function displayMiddleCard() {
 //Refactor displaySlapMessage()
 function displaySlapMessage(player) {
   show(message);
-  var slaps = ["jack", "double", "sandwich"];
+  var slaps = ["JACK", "DOUBLE", "SANDWICH"];
   for(var i = 0; i < slaps.length; i++) {
     if(currentGame.slapType === slaps[i]) {
       message.innerText = `${slaps[i]}! Player ${currentGame.whoSlapped} takes the pile!`
     }
   };
-  if(currentGame.slapType === "invalid") {
+  if(currentGame.slapType === "INVALID") {
   message.innerText = `INVALID SLAP! Player ${currentGame.whoSlapped} forfeits a card to ${player}!`
   }
 }
