@@ -19,13 +19,23 @@ function hide(feature) {
   feature.classList.add("hidden");
 }
 
+function createAltText() {
+  for(var suit in currentGame.suits) {
+    var currentSuit = currentGame.suits[suit];
+    if(currentSuit.includes(currentGame.middlePile[currentGame.middlePile.length - 1])) {
+      currentSuit = suit;
+      return currentSuit;
+    }
+  };
+};
+
 function displayMiddleCard() {
   display(middlePile);
   var currentCard = currentGame.middlePile[currentGame.middlePile.length - 1];
     if(currentGame.currentPlayer === 1) {
-      middlePile.innerHTML = `<img class="player-cards middle-card-player-1" src="${currentCard}" id="current-card">`
+      middlePile.innerHTML = `<img class="player-cards middle-card-player-1" src="${currentCard}" id="current-card" alt="card ${createAltText()}">`
    } else {
-      middlePile.innerHTML = `<img class="player-cards middle-card-player-2" src="${currentCard}" id="current-card">`
+      middlePile.innerHTML = `<img class="player-cards middle-card-player-2" src="${currentCard}" id="current-card" alt="card ${createAltText()}">`
    }
 }
 
@@ -247,7 +257,7 @@ function redemptionAttemptPlayer2() {
     currentGame.players[0].wins++;
     saveGame();
     gameReset();
-    pageRefresh(); 
+    pageRefresh();
   }
 };
 
