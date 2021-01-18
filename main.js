@@ -10,6 +10,9 @@ var currentGame;
 function show(feature) {
   feature.classList.remove("hidden");
 }
+function hide(feature) {
+  feature.classList.add("hidden");
+}
 
 function displayMiddleCard() {
   var currentCard = currentGame.middlePile[currentGame.middlePile.length - 1];
@@ -48,7 +51,9 @@ function validatePlayAction(event) {
       switchPlayers();
   } else if(event.keyCode === 70) {
       currentGame.whoSlapped = 0;
-      currentGame.slap();
+      if(currentGame.slap()){
+        hide(middlePile);
+      }
       return true;
   } else if (event.keyCode === 80 && currentGame.currentPlayer === 1) {
      currentGame.playCard();
@@ -57,7 +62,9 @@ function validatePlayAction(event) {
      switchPlayers();
   } else if (event.keyCode === 74) {
       currentGame.whoSlapped = 1;
-      currentGame.slap();
+      if(currentGame.slap()) {
+        hide(middlePile); 
+      }
       return true;
   }
 };
