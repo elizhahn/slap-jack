@@ -96,26 +96,10 @@ class Game {
     } else {
       this.middlePile.push(this.players[1].playCard());
     }
-    //update currentCard that is in play for the DOM
-// call updateMiddleCard();
-// pass in argument that points to middle Card. grab
-//from array middlePile
-//this.middlePile[-1]
-
   };
-  //In main.js, will listen for keydown condition on specific keys.
-  //eventListner keydown
-  //then I have a function attemptSlap() {
-     //if event.target === f: Player 0
-         //update currentGame.whoSlapped = 0
-         //currentGame.slap();
-     //if event.target === j: Player 1
+
 
   slap() {
-    //set the win conditions and return true
-    // in  main.js use a function attached to keypress that will call
-    //this method, use the true/false returns to use in the DOM.
-
       if(this.slapJack()) {
         this.slapType = "JACK";
         return true;

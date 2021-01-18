@@ -1,4 +1,3 @@
-//DOM SELECTORS-----------------------------
 var middlePile = document.getElementById("middle-pile");
 var currentCard = document.getElementById("current-card");
 var message = document.getElementById("message");
@@ -96,7 +95,6 @@ function checkEmptyHand() {
   return false;
 };
 
-//Function to validate and execute any play Action
 function validatePlayAction(event) {
   if(event.keyCode === 81 && currentGame.currentPlayer === 1) {
     validatePlayCard1();
@@ -115,7 +113,6 @@ function checkMiddlePile() {
   }
 }
 
-//Refactor validatePlayAction
 function validatePlayCard1() {
   currentGame.playCard();
   hide(message);
