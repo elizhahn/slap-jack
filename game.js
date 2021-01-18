@@ -117,17 +117,17 @@ class Game {
     //this method, use the true/false returns to use in the DOM.
 
       if(this.slapJack()) {
-        this.slapType = "jack";
+        this.slapType = "JACK";
         return true;
     } else if(this.slapDouble()) {
-        this.slapType = "double";
+        this.slapType = "DOUBLE";
         return true;
     } else if(this.slapSandwich()) {
-        this.slapType = "sandwich";
+        this.slapType = "SANDWICH";
         return true;
     } else {
         this.invalidSlap();
-        this.slapType = "invalid";
+        this.slapType = "INVALID";
         return false;
     }
   };
