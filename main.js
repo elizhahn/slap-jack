@@ -82,43 +82,51 @@ function checkEmptyHand() {
 
 //Function to validate and execute any play Action
 function validatePlayAction(event) {
-  validatePlayAction1(event);
-  validatePlayAction2(event);
+  if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
+    validatePlayCard1();
+  } else if(event.keyCode === 70) {
+    validateSlapCard1();
+  } else if(event.keyCode === 80 && currentGame.currentPlayer === 1) {
+    validatePlayCard2();
+  } else if (event.keyCode === 74){
+    validateSlapCard2(); 
+  }
 };
 
 //Refactor validatePlayAction
-function validatePlayAction1(event) {
-  if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
-      currentGame.playCard();
-      displayMiddleCard();
-      switchPlayers();
-  } else if(event.keyCode === 70) {
-      currentGame.whoSlapped = 0;
-        if(currentGame.slap()){
-          hide(middlePile);
-          displaySlapMessage();
-        } else {
-          displaySlapMessage();
-        }
-  }
+function validatePlayCard1() {
+  currentGame.playCard();
+  displayMiddleCard();
+  switchPlayers();
+}
+
+function validateSlapCard1() {
+  currentGame.whoSlapped = 0;
+    if(currentGame.slap()) {
+      hide(middlePile);
+      displaySlapMessage();
+  } else {
+      displaySlapMessage();
+    }
 };
 
-function validatePlayAction2(event) {
-  if (event.keyCode === 80 && currentGame.currentPlayer === 1) {
-     currentGame.playCard();
-     displayMiddleCard()
-     show(middlePile);
-     switchPlayers();
-  } else if (event.keyCode === 74) {
-      currentGame.whoSlapped = 1;
-        if(currentGame.slap()) {
-          hide(middlePile);
-          displaySlapMessage();
-        } else {
-          displaySlapMessage();
-        }
-  }
+function validatePlayCard2() {
+   currentGame.playCard();
+   displayMiddleCard()
+   show(middlePile);
+   switchPlayers();
+}
+
+function validateSlapCard2() {
+  currentGame.whoSlapped = 1;
+    if(currentGame.slap()) {
+      hide(middlePile);
+      displaySlapMessage();
+    } else {
+      displaySlapMessage();
+    }
 };
+
 
 function playCard() {
   if(event.keyCode !== 81 && event.keyCode !== 80 && event.keyCode !== 70 && event.keyCode !== 74) {
