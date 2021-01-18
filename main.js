@@ -270,11 +270,11 @@ function redemptionAttemptPlayer1() {
 
 function redemptionAttemptPlayer2() {
   if(checkMiddlePile()) {
-    return; 
+    return;
   }
   currentGame.whoSlapped = 2;
   if(currentGame.slapJack()) {
-    display(playerPile1);
+    display(playerPile2);
     displayRedemptionMessage("player 2");
     currentGame.currentPlayer = 2;
 } else {
