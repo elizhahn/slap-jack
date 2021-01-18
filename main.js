@@ -56,6 +56,12 @@ function hidePlayerPile() {
 }
 };
 
+function showRedemptionMessage(player) {
+  message.innerText = `REDEMPTION! ${player} back in the game!!`;
+  show(message); 
+}
+
+
 function checkEmptyHand() {
   if(currentGame.players[0].hand.length === 0) {
     currentGame.currentPlayer = 1;
@@ -184,6 +190,8 @@ function redemptionSlap(event) {
 function redemptionAttemptPlayer0() {
   currentGame.whoSlapped = 0;
   if(currentGame.slapJack()) {
+    show(playerPile1);
+    showRedemptionMessage("player 1");
     currentGame.currentPlayer = 0;
 } else {
     currentGame.players[1].wins++;
@@ -195,6 +203,8 @@ function redemptionAttemptPlayer0() {
 function redemptionAttemptPlayer1() {
   currentGame.whoSlapped = 1;
   if(currentGame.slapJack()) {
+    show(playerPile1);
+    showRedemptionMessage("player 2");
     currentGame.currentPlayer = 1;
 } else {
     currentGame.players[0].wins++;
