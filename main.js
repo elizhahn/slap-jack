@@ -20,7 +20,7 @@ function hide(feature) {
 function displayMiddleCard() {
   show(middlePile);
   var currentCard = currentGame.middlePile[currentGame.middlePile.length - 1];
-    if(currentGame.currentPlayer === 0) {
+    if(currentGame.currentPlayer === 1) {
       middlePile.innerHTML = `<img class="player-cards middle-card-player-1" src="${currentCard}" id="current-card">`
    } else {
       middlePile.innerHTML = `<img class="player-cards middle-card-player-2" src="${currentCard}" id="current-card">`
@@ -32,20 +32,20 @@ function displaySlapMessage() {
   var slaps = ["jack", "double", "sandwich"];
     for(var i = 0; i < slaps.length; i++){
       if(currentGame.slapType === slaps[i]){
-        message.innerText = `${slaps[i].toUpperCase()}! Player ${currentGame.whoSlapped + 1} takes the pile!`
-    } else if(currentGame.slapType === "invalid" && currentGame.whoSlapped === 0) {
-        message.innerText = "INVALID SLAP! Player 1 forfeits a card to Player 2!"
+        message.innerText = `${slaps[i].toUpperCase()}! Player ${currentGame.whoSlapped} takes the pile!`
     } else if(currentGame.slapType === "invalid" && currentGame.whoSlapped === 1) {
+        message.innerText = "INVALID SLAP! Player 1 forfeits a card to Player 2!"
+    } else if(currentGame.slapType === "invalid" && currentGame.whoSlapped === 2) {
         message.innerText = "INVALID SLAP! Player 2 forfeits a card to Player 1"
     }
   };
 };
 
 function switchPlayers() {
-  if(currentGame.currentPlayer === 0) {
-    currentGame.currentPlayer = 1;
+  if(currentGame.currentPlayer === 1) {
+    currentGame.currentPlayer = 2;
 } else {
-    currentGame.currentPlayer = 0;
+    currentGame.currentPlayer = 1;
 }
 };
 
@@ -71,10 +71,10 @@ function showWinningMessage(slapType, player) {
 
 function checkEmptyHand() {
   if(currentGame.players[0].hand.length === 0) {
-    currentGame.currentPlayer = 1;
+    currentGame.currentPlayer = 2;
     return true;
 } else if(currentGame.players[1].hand.length === 0) {
-    currentGame.currentPlayer = 0;
+    currentGame.currentPlayer = 1;
     return true;
 }
   return false;
@@ -82,14 +82,14 @@ function checkEmptyHand() {
 
 //Function to validate and execute any play Action
 function validatePlayAction(event) {
-  if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
+  if(event.keyCode === 81 && currentGame.currentPlayer === 1) {
     validatePlayCard1();
   } else if(event.keyCode === 70) {
     validateSlapCard1();
-  } else if(event.keyCode === 80 && currentGame.currentPlayer === 1) {
+  } else if(event.keyCode === 80 && currentGame.currentPlayer === 2) {
     validatePlayCard2();
   } else if (event.keyCode === 74){
-    validateSlapCard2(); 
+    validateSlapCard2();
   }
 };
 
@@ -101,7 +101,7 @@ function validatePlayCard1() {
 }
 
 function validateSlapCard1() {
-  currentGame.whoSlapped = 0;
+  currentGame.whoSlapped = 1;
     if(currentGame.slap()) {
       hide(middlePile);
       displaySlapMessage();
@@ -118,7 +118,7 @@ function validatePlayCard2() {
 }
 
 function validateSlapCard2() {
-  currentGame.whoSlapped = 1;
+  currentGame.whoSlapped = 2;
     if(currentGame.slap()) {
       hide(middlePile);
       displaySlapMessage();
@@ -143,9 +143,9 @@ function playCard() {
 };
 
 function lastPlay(event) {
-  if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
+  if(event.keyCode === 81 && currentGame.currentPlayer === 1) {
     winnerDealsPlayer0();
-} else if( event.keyCode === 80 && currentGame.currentPlayer === 1) {
+} else if( event.keyCode === 80 && currentGame.currentPlayer === 2) {
     winnerDealsPlayer1();
 } else if(event.keyCode === 70 && currentGame.players[1].hand.length === 0) {
     winningSlapPlayer0();
@@ -166,7 +166,7 @@ function winnerDealsPlayer0() {
        currentGame.players[0].shufflePlayerDeck();
     }
   //can refactor this out maybe
-  currentGame.currentPlayer = 0;
+  currentGame.currentPlayer = 1;
 };
 
 function winnerDealsPlayer1() {
@@ -180,11 +180,11 @@ function winnerDealsPlayer1() {
       currentGame.players[1].shufflePlayerDeck();
     }
   //can refactor this out maybe
-  currentGame.currentPlayer = 1;
+  currentGame.currentPlayer = 2;
 };
 
 function winningSlapPlayer0() {
-  currentGame.whoSlapped = 0;
+  currentGame.whoSlapped = 1;
   if(currentGame.slapJack()) {
     showWinningMessage("SLAPJACK", "player 1");
     currentGame.players[0].wins++;
@@ -194,7 +194,7 @@ function winningSlapPlayer0() {
 };
 
 function winningSlapPlayer1() {
-  currentGame.whoSlapped = 1;
+  currentGame.whoSlapped = 2;
     if(currentGame.slapJack()) {
       showWinningMessage("SLAPJACK", "player 2");
       currentGame.players[0].wins++;
@@ -214,11 +214,11 @@ function redemptionSlap(event) {
 };
 
 function redemptionAttemptPlayer0() {
-  currentGame.whoSlapped = 0;
+  currentGame.whoSlapped = 1;
   if(currentGame.slapJack()) {
     show(playerPile1);
     showRedemptionMessage("player 1");
-    currentGame.currentPlayer = 0;
+    currentGame.currentPlayer = 1;
 } else {
     showWinningMessage("INVALID SLAP", "player 2");
     currentGame.players[1].wins++;
@@ -228,11 +228,11 @@ function redemptionAttemptPlayer0() {
 };
 
 function redemptionAttemptPlayer1() {
-  currentGame.whoSlapped = 1;
+  currentGame.whoSlapped = 2;
   if(currentGame.slapJack()) {
     show(playerPile1);
     showRedemptionMessage("player 2");
-    currentGame.currentPlayer = 1;
+    currentGame.currentPlayer = 2;
 } else {
     showWinningMessage("INVALID SLAP", "player 1");
     currentGame.players[0].wins++;
