@@ -2,7 +2,8 @@
 var middlePile = document.getElementById("middle-pile");
 var currentCard = document.getElementById("current-card");
 var message = document.getElementById("message");
-
+var playerPile1 = document.getElementById("player1");
+var playerPile2 = document.getElementById("player1");
 var currentGame;
 
 document.addEventListener("keydown", playCard);
@@ -26,6 +27,7 @@ function displayMiddleCard() {
 }
 
 function displaySlapMessage() {
+  show(message);
   var slaps = ["jack", "double", "sandwich"];
     for(var i = 0; i < slaps.length; i++){
       if(currentGame.slapType === slaps[i]){
@@ -46,7 +48,17 @@ function switchPlayers() {
 }
 };
 
-function checkHand() {
+function checkPlayerHand() {
+  if(currentGame.players[0].hand.length === 1){
+    hide(playerPile1);
+} else if(currentGame.players[1].hand.length === 1){
+   hide(playerPile2);
+}
+};
+
+function checkEmptyHand() {
+  checkPlayerHand();
+  if(currentGame.players[0].hand.length === 0)
   if(currentGame.players[0].hand.length === 0) {
     currentGame.currentPlayer = 1;
     return true;
@@ -70,7 +82,7 @@ function validatePlayAction(event) {
         hide(middlePile);
         displaySlapMessage();
       } else {
-        displaySlapMessage(); 
+        displaySlapMessage();
       }
       return true;
   } else if (event.keyCode === 80 && currentGame.currentPlayer === 1) {
@@ -91,11 +103,11 @@ function validatePlayAction(event) {
 };
 
 function playCard() {
-  console.log("TEST");
   if(event.keyCode !== 81 && event.keyCode !== 80 && event.keyCode !== 70 && event.keyCode !== 74) {
     return;
   }
-  else if(!checkHand()) {
+  else if(!checkEmptyHand()) {
+    hide(message);
     validatePlayAction(event);
     console.log(currentGame.middlePile);
 } else {
