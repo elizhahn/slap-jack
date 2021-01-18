@@ -164,21 +164,27 @@ function redemptionAttemptPlayer1() {
 
 function gameReset() {
   if(localStorage.length === 0) {
-    var player0 = new Player(0);
-    var player1 = new Player(1);
+    var player0 = new Player(0, 0);
+    var player1 = new Player(0, 1);
     currentGame = new Game([player0, player1]);
     currentGame.shuffleDeck();
     currentGame.dealCards();
  } else {
-    var savedPlayer0 = localStorage.getItem("0");
-    var savedPlayer1 = localStorage.getItem("1");
-    savedPlayer0 = JSON.parse(savedPlayer0);
-    savedPlayer1 = JSON.parse(savedPlayer1);
-    currentGame = new Game([savedPlayer0, savedPlayer1]);
-    currentGame.shuffleDeck();
-    currentGame.dealCards();
+    playAgain();
  }
 };
+
+function playAgain() {
+  var savedPlayer0 = localStorage.getItem("0");
+  var savedPlayer1 = localStorage.getItem("1");
+  savedPlayer0 = JSON.parse(savedPlayer0);
+  savedPlayer1 = JSON.parse(savedPlayer1);
+  savedPlayer0 = new Player(savedPlayer0.wins, 0);
+  savedPlayer1 = new Player(savedPlayer1.wins, 1);
+  currentGame = new Game([savedPlayer0, savedPlayer1]);
+  currentGame.shuffleDeck();
+  currentGame.dealCards();
+}
 
 function saveGame() {
   for(var i = 0; i < 2; i++) {
