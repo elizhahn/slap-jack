@@ -144,18 +144,18 @@ function playCard() {
 
 function lastPlay(event) {
   if(event.keyCode === 81 && currentGame.currentPlayer === 1) {
-    winnerDealsPlayer0();
-} else if( event.keyCode === 80 && currentGame.currentPlayer === 2) {
     winnerDealsPlayer1();
+} else if( event.keyCode === 80 && currentGame.currentPlayer === 2) {
+    winnerDealsPlayer2();
 } else if(event.keyCode === 70 && currentGame.players[1].hand.length === 0) {
-    winningSlapPlayer0();
-} else if(event.keyCode === 74 && currentGame.players[0].hand.length === 0) {
     winningSlapPlayer1();
+} else if(event.keyCode === 74 && currentGame.players[0].hand.length === 0) {
+    winningSlapPlayer2();
 }
   redemptionSlap(event);
 };
 
-function winnerDealsPlayer0() {
+function winnerDealsPlayer1() {
   var playerHand0 = currentGame.players[0].hand;
   currentGame.playCard();
   displayMiddleCard();
@@ -169,7 +169,7 @@ function winnerDealsPlayer0() {
   currentGame.currentPlayer = 1;
 };
 
-function winnerDealsPlayer1() {
+function winnerDealsPlayer2() {
   var playerHand1 = currentGame.players[1].hand;
   currentGame.playCard();
   displayMiddleCard();
@@ -183,7 +183,7 @@ function winnerDealsPlayer1() {
   currentGame.currentPlayer = 2;
 };
 
-function winningSlapPlayer0() {
+function winningSlapPlayer1() {
   currentGame.whoSlapped = 1;
   if(currentGame.slapJack()) {
     showWinningMessage("SLAPJACK", "player 1");
@@ -193,7 +193,7 @@ function winningSlapPlayer0() {
   }
 };
 
-function winningSlapPlayer1() {
+function winningSlapPlayer2() {
   currentGame.whoSlapped = 2;
     if(currentGame.slapJack()) {
       showWinningMessage("SLAPJACK", "player 2");
@@ -207,13 +207,13 @@ function redemptionSlap(event) {
   var playerHand0 = currentGame.players[0].hand;
   var playerHand1 = currentGame.players[1].hand;
   if(event.keyCode === 70 && playerHand0.length === 0) {
-    redemptionAttemptPlayer0();
-} else if(event.keyCode === 74 && playerHand1.length === 0) {
     redemptionAttemptPlayer1();
+} else if(event.keyCode === 74 && playerHand1.length === 0) {
+    redemptionAttemptPlayer2();
 }
 };
 
-function redemptionAttemptPlayer0() {
+function redemptionAttemptPlayer1() {
   currentGame.whoSlapped = 1;
   if(currentGame.slapJack()) {
     show(playerPile1);
@@ -227,7 +227,7 @@ function redemptionAttemptPlayer0() {
   }
 };
 
-function redemptionAttemptPlayer1() {
+function redemptionAttemptPlayer2() {
   currentGame.whoSlapped = 2;
   if(currentGame.slapJack()) {
     show(playerPile1);
