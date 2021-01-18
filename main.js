@@ -213,6 +213,9 @@ function winnerDealsPlayer2() {
 };
 
 function winningSlapPlayer1() {
+  if(checkMiddlePile()) {
+    return;
+  }
   currentGame.whoSlapped = 1;
   if(currentGame.slapJack()) {
     displayWinningMessage("SLAPJACK", "player 1");
@@ -224,6 +227,9 @@ function winningSlapPlayer1() {
 };
 
 function winningSlapPlayer2() {
+  if(checkMiddlePile()) {
+    return;
+  }
   currentGame.whoSlapped = 2;
     if(currentGame.slapJack()) {
       displayWinningMessage("SLAPJACK", "player 2");
@@ -245,6 +251,9 @@ function redemptionSlap(event) {
 };
 
 function redemptionAttemptPlayer1() {
+  if(checkMiddlePile()) {
+    return;
+  }
   currentGame.whoSlapped = 1;
   if(currentGame.slapJack()) {
     display(playerPile1);
@@ -260,6 +269,9 @@ function redemptionAttemptPlayer1() {
 };
 
 function redemptionAttemptPlayer2() {
+  if(checkMiddlePile()) {
+    return; 
+  }
   currentGame.whoSlapped = 2;
   if(currentGame.slapJack()) {
     display(playerPile1);
