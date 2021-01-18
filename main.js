@@ -109,6 +109,12 @@ function validatePlayAction(event) {
   }
 };
 
+function checkMiddlePile() {
+  if(currentGame.middlePile.length === 0) {
+    return true;
+  }
+}
+
 //Refactor validatePlayAction
 function validatePlayCard1() {
   currentGame.playCard();
@@ -117,6 +123,9 @@ function validatePlayCard1() {
 }
 
 function validateSlapCard1() {
+  if(checkMiddlePile()) {
+    return;
+  }
   currentGame.whoSlapped = 1;
     if(currentGame.slap()) {
       hide(middlePile);
@@ -134,6 +143,9 @@ function validatePlayCard2() {
 }
 
 function validateSlapCard2() {
+  if(checkMiddlePile()) {
+    return; 
+  }
   currentGame.whoSlapped = 2;
     if(currentGame.slap()) {
       hide(middlePile);
