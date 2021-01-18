@@ -109,14 +109,24 @@ function validatePlayAction(event) {
   }
 };
 
+function checkMiddlePile() {
+  if(currentGame.middlePile.length === 0) {
+    return true;
+  }
+}
+
 //Refactor validatePlayAction
 function validatePlayCard1() {
   currentGame.playCard();
+  hide(message);
   displayMiddleCard();
   switchPlayers();
 }
 
 function validateSlapCard1() {
+  if(checkMiddlePile()) {
+    return;
+  }
   currentGame.whoSlapped = 1;
     if(currentGame.slap()) {
       hide(middlePile);
@@ -128,12 +138,16 @@ function validateSlapCard1() {
 
 function validatePlayCard2() {
    currentGame.playCard();
+   hide(message);
    displayMiddleCard()
    display(middlePile);
    switchPlayers();
 }
 
 function validateSlapCard2() {
+  if(checkMiddlePile()) {
+    return;
+  }
   currentGame.whoSlapped = 2;
     if(currentGame.slap()) {
       hide(middlePile);
@@ -149,7 +163,6 @@ function playCard() {
     return;
   }
   else if(!checkEmptyHand()) {
-    hide(message);
     validatePlayAction(event);
     hidePlayerPile();
     console.log(currentGame.middlePile);
@@ -200,6 +213,9 @@ function winnerDealsPlayer2() {
 };
 
 function winningSlapPlayer1() {
+  if(checkMiddlePile()) {
+    return;
+  }
   currentGame.whoSlapped = 1;
   if(currentGame.slapJack()) {
     displayWinningMessage("SLAPJACK", "player 1");
@@ -211,6 +227,9 @@ function winningSlapPlayer1() {
 };
 
 function winningSlapPlayer2() {
+  if(checkMiddlePile()) {
+    return;
+  }
   currentGame.whoSlapped = 2;
     if(currentGame.slapJack()) {
       displayWinningMessage("SLAPJACK", "player 2");
@@ -232,6 +251,9 @@ function redemptionSlap(event) {
 };
 
 function redemptionAttemptPlayer1() {
+  if(checkMiddlePile()) {
+    return;
+  }
   currentGame.whoSlapped = 1;
   if(currentGame.slapJack()) {
     display(playerPile1);
@@ -247,6 +269,9 @@ function redemptionAttemptPlayer1() {
 };
 
 function redemptionAttemptPlayer2() {
+  if(checkMiddlePile()) {
+    return; 
+  }
   currentGame.whoSlapped = 2;
   if(currentGame.slapJack()) {
     display(playerPile1);
