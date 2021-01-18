@@ -58,7 +58,13 @@ function hidePlayerPile() {
 
 function showRedemptionMessage(player) {
   message.innerText = `REDEMPTION! ${player} back in the game!!`;
-  show(message); 
+  show(message);
+}
+
+function showWinningMessage(slapType, player) {
+  show(message);
+  message.innerText = `${slapType}! ${player} wins!!`;
+  hide(middlePile);
 }
 
 
@@ -162,6 +168,7 @@ function winnerDealsPlayer1() {
 function winningSlapPlayer0() {
   currentGame.whoSlapped = 0;
   if(currentGame.slapJack()) {
+    showWinningMessage("SLAPJACK", "player 1");
     currentGame.players[0].wins++;
     saveGame();
     gameReset();
@@ -171,6 +178,7 @@ function winningSlapPlayer0() {
 function winningSlapPlayer1() {
   currentGame.whoSlapped = 1;
     if(currentGame.slapJack()) {
+      showWinningMessage("SLAPJACK", "player 2");
       currentGame.players[0].wins++;
       saveGame();
       gameReset();
