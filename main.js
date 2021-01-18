@@ -18,7 +18,7 @@ function hide(feature) {
 }
 
 function displayMiddleCard() {
-  show(middlePile);
+  display(middlePile);
   var currentCard = currentGame.middlePile[currentGame.middlePile.length - 1];
     if(currentGame.currentPlayer === 1) {
       middlePile.innerHTML = `<img class="player-cards middle-card-player-1" src="${currentCard}" id="current-card">`
@@ -27,9 +27,8 @@ function displayMiddleCard() {
    }
 }
 
-//Refactor displaySlapMessage()
 function displaySlapMessage(player) {
-  show(message);
+  display(message);
   var slaps = ["JACK", "DOUBLE", "SANDWICH"];
   for(var i = 0; i < slaps.length; i++) {
     if(currentGame.slapType === slaps[i]) {
@@ -57,12 +56,12 @@ function hidePlayerPile() {
 }
 };
 
-function showRedemptionMessage(player) {
+function displayRedemptionMessage(player) {
   message.innerText = `REDEMPTION! ${player} back in the game!!`;
   display(message);
 }
 
-function showWinningMessage(slapType, player) {
+function displayWinningMessage(slapType, player) {
   display(message);
   message.innerText = `${slapType}! ${player} wins!!`;
   hide(middlePile);
@@ -186,7 +185,7 @@ function winnerDealsPlayer2() {
 function winningSlapPlayer1() {
   currentGame.whoSlapped = 1;
   if(currentGame.slapJack()) {
-    showWinningMessage("SLAPJACK", "player 1");
+    displayWinningMessage("SLAPJACK", "player 1");
     currentGame.players[0].wins++;
     saveGame();
     gameReset();
@@ -196,7 +195,7 @@ function winningSlapPlayer1() {
 function winningSlapPlayer2() {
   currentGame.whoSlapped = 2;
     if(currentGame.slapJack()) {
-      showWinningMessage("SLAPJACK", "player 2");
+      displayWinningMessage("SLAPJACK", "player 2");
       currentGame.players[0].wins++;
       saveGame();
       gameReset();
@@ -217,10 +216,10 @@ function redemptionAttemptPlayer1() {
   currentGame.whoSlapped = 1;
   if(currentGame.slapJack()) {
     display(playerPile1);
-    showRedemptionMessage("player 1");
+    displayRedemptionMessage("player 1");
     currentGame.currentPlayer = 1;
 } else {
-    showWinningMessage("INVALID SLAP", "player 2");
+    displayWinningMessage("INVALID SLAP", "player 2");
     currentGame.players[1].wins++;
     saveGame();
     gameReset();
@@ -231,10 +230,10 @@ function redemptionAttemptPlayer2() {
   currentGame.whoSlapped = 2;
   if(currentGame.slapJack()) {
     display(playerPile1);
-    showRedemptionMessage("player 2");
+    displayRedemptionMessage("player 2");
     currentGame.currentPlayer = 2;
 } else {
-    showWinningMessage("INVALID SLAP", "player 1");
+    displayWinningMessage("INVALID SLAP", "player 1");
     currentGame.players[0].wins++;
     saveGame();
     gameReset();
