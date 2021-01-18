@@ -57,7 +57,6 @@ function hidePlayerPile() {
 };
 
 function checkEmptyHand() {
-  if(currentGame.players[0].hand.length === 0)
   if(currentGame.players[0].hand.length === 0) {
     currentGame.currentPlayer = 1;
     return true;
@@ -108,7 +107,7 @@ function playCard() {
   else if(!checkEmptyHand()) {
     hide(message);
     validatePlayAction(event);
-    hidePlayerPile(); 
+    hidePlayerPile();
     console.log(currentGame.middlePile);
 } else {
   lastPlay(event);
@@ -131,6 +130,7 @@ function lastPlay(event) {
 function winnerDealsPlayer0() {
   var playerHand0 = currentGame.players[0].hand;
   currentGame.playCard();
+  displayMiddleCard();
     if(playerHand0.length === 0) {
        var cardsWon = currentGame.middlePile.splice(0);
        currentGame.players[0].hand = cardsWon;
@@ -143,6 +143,7 @@ function winnerDealsPlayer0() {
 function winnerDealsPlayer1() {
   var playerHand1 = currentGame.players[1].hand;
   currentGame.playCard();
+  displayMiddleCard();
     if(playerHand1.length === 0) {
       var cardsWon = currentGame.middlePile.splice(0);
       currentGame.players[1].hand = cardsWon;
