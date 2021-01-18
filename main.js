@@ -90,7 +90,7 @@ function validatePlayAction(event) {
 function validatePlayAction1(event) {
   if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
       currentGame.playCard();
-      displayMiddleCard()
+      displayMiddleCard();
       switchPlayers();
   } else if(event.keyCode === 70) {
       currentGame.whoSlapped = 0;
@@ -100,9 +100,8 @@ function validatePlayAction1(event) {
         } else {
           displaySlapMessage();
         }
-      return true;
-}
-}
+  }
+};
 
 function validatePlayAction2(event) {
   if (event.keyCode === 80 && currentGame.currentPlayer === 1) {
@@ -118,9 +117,8 @@ function validatePlayAction2(event) {
         } else {
           displaySlapMessage();
         }
-      return true;
   }
-}
+};
 
 function playCard() {
   if(event.keyCode !== 81 && event.keyCode !== 80 && event.keyCode !== 70 && event.keyCode !== 74) {
