@@ -18,6 +18,7 @@ function hide(feature) {
 }
 
 function displayMiddleCard() {
+  show(middlePile); 
   var currentCard = currentGame.middlePile[currentGame.middlePile.length - 1];
     if(currentGame.currentPlayer === 0) {
       middlePile.innerHTML = `<img class="player-cards middle-card-player-1" src="${currentCard}" id="current-card">`
@@ -84,7 +85,6 @@ function validatePlayAction(event) {
   if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
       currentGame.playCard();
       displayMiddleCard()
-      show(middlePile);
       switchPlayers();
   } else if(event.keyCode === 70) {
       currentGame.whoSlapped = 0;
@@ -144,6 +144,7 @@ function winnerDealsPlayer0() {
   currentGame.playCard();
   displayMiddleCard();
     if(playerHand0.length === 0) {
+       hide(middlePile);
        var cardsWon = currentGame.middlePile.splice(0);
        currentGame.players[0].hand = cardsWon;
        currentGame.players[0].shufflePlayerDeck();
@@ -157,6 +158,7 @@ function winnerDealsPlayer1() {
   currentGame.playCard();
   displayMiddleCard();
     if(playerHand1.length === 0) {
+      hide(middlePile);
       var cardsWon = currentGame.middlePile.splice(0);
       currentGame.players[1].hand = cardsWon;
       currentGame.players[1].shufflePlayerDeck();
