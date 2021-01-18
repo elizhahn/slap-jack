@@ -202,6 +202,7 @@ function redemptionAttemptPlayer0() {
     showRedemptionMessage("player 1");
     currentGame.currentPlayer = 0;
 } else {
+    showWinningMessage("INVALID SLAP", "player 2");
     currentGame.players[1].wins++;
     saveGame();
     gameReset();
@@ -215,6 +216,7 @@ function redemptionAttemptPlayer1() {
     showRedemptionMessage("player 2");
     currentGame.currentPlayer = 1;
 } else {
+    showWinningMessage("INVALID SLAP", "player 1");
     currentGame.players[0].wins++;
     saveGame();
     gameReset();
