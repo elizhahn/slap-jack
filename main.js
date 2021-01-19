@@ -7,11 +7,15 @@ var playerWins1 = document.getElementById("player-1-wins");
 var playerWins2 = document.getElementById("player-2-wins");
 var cardCount1 = document.getElementById("player1CardCount");
 var cardCount2 = document.getElementById("player2CardCount");
+var buttonPlayAgain = document.getElementById("playAgain");
+var buttonNewPlayers = document.getElementById("newPlayers");
 
 var currentGame;
 
 document.addEventListener("keydown", playCard);
 window.addEventListener("load", gameReset);
+buttonPlayAgain.addEventListener("click", playAgain);
+buttonNewPlayers.addEventListener("click", gameReset);
 
 function display(feature) {
   feature.classList.remove("hidden");
@@ -47,6 +51,11 @@ function displayMiddleCard() {
       middlePile.innerHTML = `<img class="player-cards middle-card-player-2" src="${currentCard}" id="current-card" alt="card ${createAltText()}">`
    }
 };
+
+function displayPlayerCardCount() {
+    cardCount1.innerText = currentGame.players[0].playerCardCount();
+    cardCount2.innerText = currentGame.players[1].playerCardCount();
+}
 
 function displaySlapMessage(player) {
   display(message);
@@ -101,11 +110,6 @@ function switchPlayers() {
     currentGame.currentPlayer = 1;
 }
 };
-
-function displayPlayerCardCount() {
-    cardCount1.innerText = currentGame.players[0].playerCardCount();
-    cardCount2.innerText = currentGame.players[1].playerCardCount();
-}
 
 function playCard() {
   if(event.keyCode !== 81 && event.keyCode !== 80 && event.keyCode !== 70 && event.keyCode !== 74) {
@@ -294,17 +298,15 @@ function saveGame() {
 };
 
 function gameReset() {
-  if(localStorage.length === 0) {
-    var player1 = new Player(0, 1);
-    var player2 = new Player(0, 2);
-    currentGame = new Game([player1, player2]);
-    displayPlayerWins();
-    currentGame.shuffleDeck();
-    currentGame.dealCards();
-    displayPlayerCardCount();
- } else {
-    playAgain();
- }
+  localStorage.clear();
+  var player1 = new Player(0, 1);
+  var player2 = new Player(0, 2);
+  currentGame = new Game([player1, player2]);
+  displayPlayerWins();
+  currentGame.shuffleDeck();
+  currentGame.dealCards();
+  displayPlayerCardCount();
+
 };
 
 function playAgain() {
