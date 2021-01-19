@@ -7,11 +7,16 @@ var playerWins1 = document.getElementById("player-1-wins");
 var playerWins2 = document.getElementById("player-2-wins");
 var cardCount1 = document.getElementById("player1CardCount");
 var cardCount2 = document.getElementById("player2CardCount");
+var buttonPlayAgain = document.getElementById("playAgain");
+var buttonNewPlayers = document.getElementById("newPlayers");
+var playerChoiceBox = document.getElementById("playerChoiceBox");
 
 var currentGame;
 
 document.addEventListener("keydown", playCard);
-window.addEventListener("load", gameReset);
+window.addEventListener("load", gameReload);
+buttonPlayAgain.addEventListener("click", playAgain);
+buttonNewPlayers.addEventListener("click", newPlayers);
 
 function display(feature) {
   feature.classList.remove("hidden");
@@ -47,6 +52,11 @@ function displayMiddleCard() {
       middlePile.innerHTML = `<img class="player-cards middle-card-player-2" src="${currentCard}" id="current-card" alt="card ${createAltText()}">`
    }
 };
+
+function displayPlayerCardCount() {
+    cardCount1.innerText = currentGame.players[0].playerCardCount();
+    cardCount2.innerText = currentGame.players[1].playerCardCount();
+}
 
 function displaySlapMessage(player) {
   display(message);
@@ -101,11 +111,6 @@ function switchPlayers() {
     currentGame.currentPlayer = 1;
 }
 };
-
-function displayPlayerCardCount() {
-    cardCount1.innerText = currentGame.players[0].playerCardCount();
-    cardCount2.innerText = currentGame.players[1].playerCardCount();
-}
 
 function playCard() {
   if(event.keyCode !== 81 && event.keyCode !== 80 && event.keyCode !== 70 && event.keyCode !== 74) {
@@ -222,7 +227,8 @@ function winningSlapPlayer1() {
     displayPlayerCardCount();
     currentGame.players[0].wins++;
     saveGame();
-    pageRefresh();
+    displayPlayerWins();
+    displayEndGameOptions();
   }
 };
 
@@ -236,8 +242,8 @@ function winningSlapPlayer2() {
     displayPlayerCardCount();
     currentGame.players[1].wins++;
     saveGame();
-    displayPlayerCardCount();
-    pageRefresh();
+    displayPlayerWins();
+    displayEndGameOptions();
   }
 };
 
@@ -265,7 +271,8 @@ function redemptionAttemptPlayer1() {
     displayWinningMessage("INVALID SLAP", "player 2");
     currentGame.players[1].wins++;
     saveGame();
-    pageRefresh();
+    displayPlayerWins();
+    displayEndGameOptions();
   }
 };
 
@@ -283,8 +290,15 @@ function redemptionAttemptPlayer2() {
     displayWinningMessage("INVALID SLAP", "player 1");
     currentGame.players[0].wins++;
     saveGame();
-    pageRefresh();
+    displayPlayerWins();
+    displayEndGameOptions();
   }
+};
+
+function displayEndGameOptions() {
+  setTimeout(function() {
+    display(playerChoiceBox);
+  }, 2000);
 };
 
 function saveGame() {
@@ -293,21 +307,26 @@ function saveGame() {
   }
 };
 
-function gameReset() {
-  if(localStorage.length === 0) {
-    var player1 = new Player(0, 1);
-    var player2 = new Player(0, 2);
-    currentGame = new Game([player1, player2]);
-    displayPlayerWins();
-    currentGame.shuffleDeck();
-    currentGame.dealCards();
-    displayPlayerCardCount();
- } else {
-    playAgain();
- }
+function setUpGame() {
+  display(playerPile1);
+  display(playerPile2);
+  displayPlayerWins();
+  currentGame.shuffleDeck();
+  currentGame.dealCards();
+  displayPlayerCardCount();
+}
+
+function newPlayers() {
+  hide(playerChoiceBox);
+  localStorage.clear();
+  var player1 = new Player(0, 1);
+  var player2 = new Player(0, 2);
+  currentGame = new Game([player1, player2]);
+  setUpGame();
 };
 
 function playAgain() {
+  hide(playerChoiceBox);
   var savedPlayer1 = localStorage.getItem("1");
   var savedPlayer2 = localStorage.getItem("2");
   savedPlayer1 = JSON.parse(savedPlayer1);
@@ -315,15 +334,13 @@ function playAgain() {
   savedPlayer1 = new Player(savedPlayer1.wins, 1);
   savedPlayer2 = new Player(savedPlayer2.wins, 2);
   currentGame = new Game([savedPlayer1, savedPlayer2]);
-  displayPlayerWins();
-  currentGame.shuffleDeck();
-  currentGame.dealCards();
-  displayPlayerCardCount();
+  setUpGame();
 };
 
-function pageRefresh() {
-  setTimeout(function() {
-    window.location.reload();
-    gameReset();
-  }, 3000);
+function gameReload() {
+  if(localStorage.length === 0 ) {
+    newPlayers();
+  } else {
+    playAgain();
+  }
 };
