@@ -16,7 +16,7 @@ var currentGame;
 document.addEventListener("keydown", playCard);
 window.addEventListener("load", gameReset);
 buttonPlayAgain.addEventListener("click", playAgain);
-buttonNewPlayers.addEventListener("click", gameReset);
+buttonNewPlayers.addEventListener("click", newPlayers);
 
 function display(feature) {
   feature.classList.remove("hidden");
@@ -86,10 +86,6 @@ function displayPlayerWins() {
   playerWins1.innerText = `${currentGame.players[0].wins} Wins`;
   playerWins2.innerText = `${currentGame.players[1].wins} Wins`;
 };
-
-function displayEndGameOptions() {
-  playerChoiceBox.classList.add("show-modal");
-}
 
 function checkEmptyHand() {
   if(currentGame.players[0].hand.length === 0) {
@@ -230,8 +226,7 @@ function winningSlapPlayer1() {
     displayWinningMessage("SLAPJACK", "player 1");
     displayPlayerCardCount();
     currentGame.players[0].wins++;
-    saveGame();
-    pageRefresh();
+    displayEndGameOptions();
   }
 };
 
@@ -244,9 +239,7 @@ function winningSlapPlayer2() {
     displayWinningMessage("SLAPJACK", "player 2");
     displayPlayerCardCount();
     currentGame.players[1].wins++;
-    saveGame();
-    displayPlayerCardCount();
-    pageRefresh();
+    displayEndGameOptions();
   }
 };
 
@@ -273,8 +266,7 @@ function redemptionAttemptPlayer1() {
 } else {
     displayWinningMessage("INVALID SLAP", "player 2");
     currentGame.players[1].wins++;
-    saveGame();
-    pageRefresh();
+    displayEndGameOptions();
   }
 };
 
@@ -291,8 +283,7 @@ function redemptionAttemptPlayer2() {
 } else {
     displayWinningMessage("INVALID SLAP", "player 1");
     currentGame.players[0].wins++;
-    saveGame();
-    pageRefresh();
+    displayEndGameOptions();
   }
 };
 
@@ -301,6 +292,12 @@ function saveGame() {
     currentGame.players[i].saveToStorage();
   }
 };
+
+function newPlayers() {
+  gameReset();
+  hide(playerChoiceBox);
+  window.location.reload();
+}
 
 function gameReset() {
   localStorage.clear();
@@ -311,10 +308,16 @@ function gameReset() {
   currentGame.shuffleDeck();
   currentGame.dealCards();
   displayPlayerCardCount();
-
 };
 
 function playAgain() {
+  gameReload();
+  hide(playerChoiceBox);
+  window.location.reload();
+}
+
+function gameReload() {
+  saveGame();
   var savedPlayer1 = localStorage.getItem("1");
   var savedPlayer2 = localStorage.getItem("2");
   savedPlayer1 = JSON.parse(savedPlayer1);
@@ -328,9 +331,8 @@ function playAgain() {
   displayPlayerCardCount();
 };
 
-function pageRefresh() {
+function displayEndGameOptions() {
   setTimeout(function() {
-    window.location.reload();
-    gameReset();
+    display(playerChoiceBox);
   }, 3000);
 };
