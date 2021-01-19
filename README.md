@@ -96,7 +96,7 @@ Each player will be able to start the game by dealing a card using "q" (player 1
 ## Slap Cards
 Each player will be able to "slap" a card using "f" (player 1) and "j" (player 2). When a player slaps, a message will appear in the top of the window that describes the slap attempt and the outcome. The middle pile will also disappear.  
 
-![](https://gph.is/g/EqW515x)
+![](https://media.giphy.com/media/IaDM7cmv6ADPMKcsA7/giphy.gif)
 
 
 ## Slap Conditions
@@ -104,51 +104,51 @@ There are 4 slap conditions in this game. A player will win the middle pile if t
 
 ### Jack
 
-![](https://gph.is/g/E0Qx2DX)
+![](https://media.giphy.com/media/UGZ0HrFDnUdKF9Jqbw/giphy.gif
 
 ### Double
 
-![](https://gph.is/g/aRj6NeA)
+![](https://media.giphy.com/media/WGz64GxSTD6RWoX3it/giphy.gif)
 
 ### Sandwich
 
-![](https://gph.is/g/4DWB6Gz)
+![](https://media.giphy.com/media/B9BHkk9mWnZBO0c6k5/giphy.gif)
 
 ### Invalid 
 
-![](https://gph.is/g/4oWMpnJ)
+![](https://media.giphy.com/media/tWEZrghrn0CPHo9DCc/giphy.gif)
 
 
 ## Last Play Conditions
 
 When one of the players runs out of cards, their pile will disappear and they can no longer deal cards. The other player will now deal cards into the middle pile until a jack appears. The only way to win is to slap a jack in this scenario. If no one slaps a jack and the other player runs out of cards, the winning player will pick up the middle pile, the pile will be shuffled, and the cards can be dealt again. 
 
-![](https://gph.is/g/4oWMpVY)
+![](https://media.giphy.com/media/H6WD3bmacVomVop6o5/giphy.gif)
 
-![](https://gph.is/g/ZdjXlRD)
+![](https://media.giphy.com/media/8x4Gw2AmbqV6JtLlXn/giphy.gif)
 
 ## Redemption Slap
 
 When a player runs out of cards, they have one chance to get back in the game. If they slap a jack before the other player, they will win the cards in the middle pile and will be back in the game. Their pile will reappear and they can now deal cards again. The game will cycle on as normal. 
 
-![](https://gph.is/g/EGn79rO)
+![](https://media.giphy.com/media/BU9VAalozWox4GCzVN/giphy.gif)
 
 ## Player Wins
 
 There are two conditions a player can win. Under last play conditions, if the winning player deals a jack and slaps it before the other player, the game ends and that player wins. Additionally, if the player who is out of cards slaps anything other than a jack, the game ends, and the player with the cards wins. The win count for the winning player will update and be displayed. 
 
 ### Winning player slaps a jack
-![](https://gph.is/g/am1W5yj)
+![](https://media.giphy.com/media/WLkURJtvSU4ZFOvKR0/giphy.gif)
 
 ### Losing player slaps invalidly
-![](https://gph.is/g/ZrW5XRj)
+![](https://media.giphy.com/media/zRn4bmDBypHoUqfN5y/giphy.gif)
 
 ## Player Game Reset
 
 When a player wins, there will be a small delay and a modal box will pop up with two options. Users can either click the "PLAY AGAIN" button or the "NEW PLAYERS" button. If the play again option is chosen, the game will reset and the win count will persist. If the new players option is clicked, the game will reset and the win count will be set to 0. Additionally if the page is reloaded, the win counts will persist. 
 
-![](https://gph.is/g/4DWBbkv)
-![](https://gph.is/g/4oWM5WK)
+![](https://media.giphy.com/media/ATen7qGjX3UW5qRS4I/giphy.gif)
+![](https://media.giphy.com/media/WxuzeNw1eZpfK7BcSE/giphy.gif)
 
 ---
 ## Challenges
