@@ -64,8 +64,6 @@ h1 {
   background-color:rgba(0, 0, 0, 0.7);
   height: 100%;
   width: 100%;
-  visibility: hidden; 
-  opacity: 0;
 }
 
 .modal-content {
@@ -90,12 +88,6 @@ h1 {
   background: linear-gradient(90deg, #de16a5, #f07b32 70%);
   border-radius: 5px;
 }
-
-.show-modal {
-  opacity: 1;
-  visibility: visible;
-}
-
 
 /* ---------------CARD COLORS---------------------- */
 
