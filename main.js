@@ -298,7 +298,7 @@ function redemptionAttemptPlayer2() {
 function displayEndGameOptions() {
   setTimeout(function() {
     display(playerChoiceBox);
-  }, 3000);
+  }, 2000);
 };
 
 function saveGame() {
