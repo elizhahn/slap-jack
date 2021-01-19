@@ -1,6 +1,6 @@
----
-Title: Slap Jack
----
+
+# Slap Jack
+
 
 A [Front-End Project](https://frontend.turing.io/projects/module-1/slapjack.html) by [Elizabeth Hahn](https://github.com/elizhahn) 
 * Project Manager: [Hannah Hudson](https://github.com/hannahhch)
