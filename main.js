@@ -9,6 +9,7 @@ var cardCount1 = document.getElementById("player1CardCount");
 var cardCount2 = document.getElementById("player2CardCount");
 var buttonPlayAgain = document.getElementById("playAgain");
 var buttonNewPlayers = document.getElementById("newPlayers");
+var playerChoiceBox = document.getElementById("playerChoiceBox");
 
 var currentGame;
 
@@ -85,6 +86,10 @@ function displayPlayerWins() {
   playerWins1.innerText = `${currentGame.players[0].wins} Wins`;
   playerWins2.innerText = `${currentGame.players[1].wins} Wins`;
 };
+
+function displayEndGameOptions() {
+  playerChoiceBox.classList.add("show-modal");
+}
 
 function checkEmptyHand() {
   if(currentGame.players[0].hand.length === 0) {
