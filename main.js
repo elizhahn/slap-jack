@@ -308,6 +308,7 @@ function saveGame() {
 };
 
 function setUpGame() {
+  hide(message); 
   display(playerPile1);
   display(playerPile2);
   displayPlayerWins();
