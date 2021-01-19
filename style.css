@@ -65,11 +65,11 @@ h1 {
 }
 
 .middle-card-player-1 {
-  box-shadow: 0px 0px 50px #1f036b, -17px 0px 0 -5px #eee, 11px -5px 0 -5px #eee
+  box-shadow: 0px 0px 50px 10px #1f036b, -17px 0px 0 -5px #eee, 11px -5px 0 -5px #eee
 }
 
 .middle-card-player-2 {
-  box-shadow: 0px 0px 50px #0c6103, -17px 0px 0 -5px #eee, 11px -5px 0 -5px #eee
+  box-shadow: 0px 0px 50px 10px #0c6103, -17px 0px 0 -5px #eee, 11px -5px 0 -5px #eee
 
 }
 
