@@ -83,7 +83,7 @@ This is a Turing School of Software and Design Module 1 project. This project en
 ## DeskTop Layout
 
 The Application page will display two player piles with an empty space for the middle pile. Each player will have a card count displayed above their pile and a win count displayed below their pile. 
-![]()
+![](https://media.giphy.com/media/mirTQN89cRKuoEGc91/giphy.gif)
 
 
 ## Deal Cards
@@ -104,7 +104,7 @@ There are 4 slap conditions in this game. A player will win the middle pile if t
 
 ### Jack
 
-![](https://media.giphy.com/media/UGZ0HrFDnUdKF9Jqbw/giphy.gif
+![](https://media.giphy.com/media/UGZ0HrFDnUdKF9Jqbw/giphy.gif)
 
 ### Double
 
@@ -123,8 +123,10 @@ There are 4 slap conditions in this game. A player will win the middle pile if t
 
 When one of the players runs out of cards, their pile will disappear and they can no longer deal cards. The other player will now deal cards into the middle pile until a jack appears. The only way to win is to slap a jack in this scenario. If no one slaps a jack and the other player runs out of cards, the winning player will pick up the middle pile, the pile will be shuffled, and the cards can be dealt again. 
 
+### Player runs out of cards
 ![](https://media.giphy.com/media/H6WD3bmacVomVop6o5/giphy.gif)
 
+### Winning player runs through their deck and nothing is slapped
 ![](https://media.giphy.com/media/8x4Gw2AmbqV6JtLlXn/giphy.gif)
 
 ## Redemption Slap
