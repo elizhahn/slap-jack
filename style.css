@@ -42,37 +42,34 @@ h1 {
   margin-bottom: 80px;
 }
 
-.player-pile {
-  margin-top: 45px;
-}
-
 .player-cards {
   border-radius: 10px;
   height: 51%;
   width: 56%;
 }
 
-.player-wins {
-  margin-top: 10px;
+.player-info {
+  margin: 20px;
   font-size: 1.3em;
+  text-shadow: #fff 1px 0px 10px;
 }
 
 /* ---------------CARD COLORS---------------------- */
 
 .player-1-color {
-  box-shadow: 0px 0px 40px #1f036b;
+  box-shadow: 0px 0px 40px 10px #1f036b;
 }
 
 .player-2-color {
-  box-shadow: 0px 0px 40px #0c6103;
+  box-shadow: 0px 0px 40px 10px #0c6103;
 }
 
 .middle-card-player-1 {
-  box-shadow: 0px 0px 50px #1f036b, -17px 0px 0 -5px #eee, 11px -5px 0 -5px #eee
+  box-shadow: 0px 0px 50px 10px #1f036b, -17px 0px 0 -5px #eee, 11px -5px 0 -5px #eee
 }
 
 .middle-card-player-2 {
-  box-shadow: 0px 0px 50px #0c6103, -17px 0px 0 -5px #eee, 11px -5px 0 -5px #eee
+  box-shadow: 0px 0px 50px 10px #0c6103, -17px 0px 0 -5px #eee, 11px -5px 0 -5px #eee
 
 }
 

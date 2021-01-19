@@ -5,6 +5,9 @@ var playerPile1 = document.getElementById("player1");
 var playerPile2 = document.getElementById("player2");
 var playerWins1 = document.getElementById("player-1-wins");
 var playerWins2 = document.getElementById("player-2-wins");
+var cardCount1 = document.getElementById("player1CardCount");
+var cardCount2 = document.getElementById("player2CardCount");
+
 var currentGame;
 
 document.addEventListener("keydown", playCard);
@@ -17,7 +20,7 @@ function hide(feature) {
   feature.classList.add("hidden");
 }
 
-function hidePlayerPile() {
+function checkPlayerPile() {
   if(currentGame.players[0].hand.length === 0) {
     hide(playerPile1);
 } else if(currentGame.players[1].hand.length === 0) {
@@ -99,13 +102,19 @@ function switchPlayers() {
 }
 };
 
+function displayPlayerCardCount() {
+    cardCount1.innerText = currentGame.players[0].playerCardCount();
+    cardCount2.innerText = currentGame.players[1].playerCardCount();
+}
+
 function playCard() {
   if(event.keyCode !== 81 && event.keyCode !== 80 && event.keyCode !== 70 && event.keyCode !== 74) {
     return;
   }
   else if(!checkEmptyHand()) {
     validatePlayAction(event);
-    hidePlayerPile();
+    displayPlayerCardCount();
+    checkPlayerPile();
 } else {
   lastPlay(event);
 }
@@ -167,8 +176,10 @@ function validateSlapCard2() {
 function lastPlay(event) {
   if(event.keyCode === 81 && currentGame.currentPlayer === 1) {
     winnerDealsPlayer1();
+    displayPlayerCardCount();
 } else if( event.keyCode === 80 && currentGame.currentPlayer === 2) {
     winnerDealsPlayer2();
+    displayPlayerCardCount();
 } else if(event.keyCode === 70 && currentGame.players[1].hand.length === 0) {
     winningSlapPlayer1();
 } else if(event.keyCode === 74 && currentGame.players[0].hand.length === 0) {
@@ -208,9 +219,9 @@ function winningSlapPlayer1() {
   currentGame.whoSlapped = 1;
   if(currentGame.slapJack()) {
     displayWinningMessage("SLAPJACK", "player 1");
+    displayPlayerCardCount();
     currentGame.players[0].wins++;
     saveGame();
-    gameReset();
     pageRefresh();
   }
 };
@@ -222,9 +233,10 @@ function winningSlapPlayer2() {
   currentGame.whoSlapped = 2;
   if(currentGame.slapJack()) {
     displayWinningMessage("SLAPJACK", "player 2");
+    displayPlayerCardCount();
     currentGame.players[1].wins++;
     saveGame();
-    gameReset();
+    displayPlayerCardCount();
     pageRefresh();
   }
 };
@@ -247,12 +259,12 @@ function redemptionAttemptPlayer1() {
   if(currentGame.slapJack()) {
     display(playerPile1);
     displayRedemptionMessage("player 1");
+    displayPlayerCardCount();
     currentGame.currentPlayer = 1;
 } else {
     displayWinningMessage("INVALID SLAP", "player 2");
     currentGame.players[1].wins++;
     saveGame();
-    gameReset();
     pageRefresh();
   }
 };
@@ -265,12 +277,12 @@ function redemptionAttemptPlayer2() {
   if(currentGame.slapJack()) {
     display(playerPile2);
     displayRedemptionMessage("player 2");
+    displayPlayerCardCount();
     currentGame.currentPlayer = 2;
 } else {
     displayWinningMessage("INVALID SLAP", "player 1");
     currentGame.players[0].wins++;
     saveGame();
-    gameReset();
     pageRefresh();
   }
 };
@@ -289,6 +301,7 @@ function gameReset() {
     displayPlayerWins();
     currentGame.shuffleDeck();
     currentGame.dealCards();
+    displayPlayerCardCount();
  } else {
     playAgain();
  }
@@ -305,10 +318,12 @@ function playAgain() {
   displayPlayerWins();
   currentGame.shuffleDeck();
   currentGame.dealCards();
+  displayPlayerCardCount();
 };
 
 function pageRefresh() {
   setTimeout(function() {
     window.location.reload();
+    gameReset();
   }, 3000);
 };

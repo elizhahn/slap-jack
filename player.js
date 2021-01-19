@@ -21,5 +21,9 @@ class Player {
       shuffledCards.push(randomCard[0]);
   }
     this.hand = shuffledCards;
- };
+  };
+  playerCardCount() {
+   var cardCount = this.hand.length
+   return cardCount; 
+ }
 };
