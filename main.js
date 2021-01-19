@@ -1,10 +1,10 @@
-var middlePile = document.getElementById("middle-pile");
-var currentCard = document.getElementById("current-card");
+var middlePile = document.getElementById("middlePile");
+var currentCard = document.getElementById("currentCard");
 var message = document.getElementById("message");
 var playerPile1 = document.getElementById("player1");
 var playerPile2 = document.getElementById("player2");
-var playerWins1 = document.getElementById("player-1-wins");
-var playerWins2 = document.getElementById("player-2-wins");
+var playerWins1 = document.getElementById("playerWins1");
+var playerWins2 = document.getElementById("playerWins2");
 var cardCount1 = document.getElementById("player1CardCount");
 var cardCount2 = document.getElementById("player2CardCount");
 var buttonPlayAgain = document.getElementById("playAgain");
@@ -47,9 +47,9 @@ function displayMiddleCard() {
   display(middlePile);
   var currentCard = currentGame.middlePile[currentGame.middlePile.length - 1];
     if(currentGame.currentPlayer === 1) {
-      middlePile.innerHTML = `<img class="player-cards middle-card-player-1" src="${currentCard}" id="current-card" alt="card ${createAltText()}">`
+      middlePile.innerHTML = `<img class="player-cards middle-card-player-1" src="${currentCard}" id="currentCard" alt="card ${createAltText()}">`
    } else {
-      middlePile.innerHTML = `<img class="player-cards middle-card-player-2" src="${currentCard}" id="current-card" alt="card ${createAltText()}">`
+      middlePile.innerHTML = `<img class="player-cards middle-card-player-2" src="${currentCard}" id="currentCard" alt="card ${createAltText()}">`
    }
 };
 
@@ -308,6 +308,7 @@ function saveGame() {
 };
 
 function setUpGame() {
+  hide(message); 
   display(playerPile1);
   display(playerPile2);
   displayPlayerWins();
