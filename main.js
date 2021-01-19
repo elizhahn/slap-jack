@@ -5,6 +5,9 @@ var playerPile1 = document.getElementById("player1");
 var playerPile2 = document.getElementById("player2");
 var playerWins1 = document.getElementById("player-1-wins");
 var playerWins2 = document.getElementById("player-2-wins");
+var cardCount1 = document.getElementById("player1CardCount");
+var cardCount2 = document.getElementById("player2CardCount");
+
 var currentGame;
 
 document.addEventListener("keydown", playCard);
@@ -98,6 +101,11 @@ function switchPlayers() {
     currentGame.currentPlayer = 1;
 }
 };
+
+function displayPlayerCardCount() {
+    cardCount1.innerText = players[0].playerCardCount();
+    cardCount2.innerText = players[1].playerCardCount();
+}
 
 function playCard() {
   if(event.keyCode !== 81 && event.keyCode !== 80 && event.keyCode !== 70 && event.keyCode !== 74) {
