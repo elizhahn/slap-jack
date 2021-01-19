@@ -14,7 +14,7 @@ var playerChoiceBox = document.getElementById("playerChoiceBox");
 var currentGame;
 
 document.addEventListener("keydown", playCard);
-window.addEventListener("load", gameReset);
+window.addEventListener("load", gameReload);
 buttonPlayAgain.addEventListener("click", playAgain);
 buttonNewPlayers.addEventListener("click", newPlayers);
 
@@ -226,7 +226,8 @@ function winningSlapPlayer1() {
     displayWinningMessage("SLAPJACK", "player 1");
     displayPlayerCardCount();
     currentGame.players[0].wins++;
-    displayPlayerWins(); 
+    saveGame();
+    displayPlayerWins();
     displayEndGameOptions();
   }
 };
@@ -240,6 +241,7 @@ function winningSlapPlayer2() {
     displayWinningMessage("SLAPJACK", "player 2");
     displayPlayerCardCount();
     currentGame.players[1].wins++;
+    saveGame();
     displayPlayerWins();
     displayEndGameOptions();
   }
@@ -268,6 +270,7 @@ function redemptionAttemptPlayer1() {
 } else {
     displayWinningMessage("INVALID SLAP", "player 2");
     currentGame.players[1].wins++;
+    saveGame();
     displayPlayerWins();
     displayEndGameOptions();
   }
@@ -286,9 +289,16 @@ function redemptionAttemptPlayer2() {
 } else {
     displayWinningMessage("INVALID SLAP", "player 1");
     currentGame.players[0].wins++;
+    saveGame();
     displayPlayerWins();
     displayEndGameOptions();
   }
+};
+
+function displayEndGameOptions() {
+  setTimeout(function() {
+    display(playerChoiceBox);
+  }, 3000);
 };
 
 function saveGame() {
@@ -297,31 +307,26 @@ function saveGame() {
   }
 };
 
-function newPlayers() {
-  gameReset();
-  hide(playerChoiceBox);
-  window.location.reload();
-}
-
-function gameReset() {
-  localStorage.clear();
-  var player1 = new Player(0, 1);
-  var player2 = new Player(0, 2);
-  currentGame = new Game([player1, player2]);
+function setUpGame() {
+  display(playerPile1);
+  display(playerPile2);
   displayPlayerWins();
   currentGame.shuffleDeck();
   currentGame.dealCards();
   displayPlayerCardCount();
+}
+
+function newPlayers() {
+  hide(playerChoiceBox);
+  localStorage.clear();
+  var player1 = new Player(0, 1);
+  var player2 = new Player(0, 2);
+  currentGame = new Game([player1, player2]);
+  setUpGame();
 };
 
 function playAgain() {
-  gameReload();
   hide(playerChoiceBox);
-  window.location.reload();
-}
-
-function gameReload() {
-  saveGame();
   var savedPlayer1 = localStorage.getItem("1");
   var savedPlayer2 = localStorage.getItem("2");
   savedPlayer1 = JSON.parse(savedPlayer1);
@@ -329,14 +334,13 @@ function gameReload() {
   savedPlayer1 = new Player(savedPlayer1.wins, 1);
   savedPlayer2 = new Player(savedPlayer2.wins, 2);
   currentGame = new Game([savedPlayer1, savedPlayer2]);
-  displayPlayerWins();
-  currentGame.shuffleDeck();
-  currentGame.dealCards();
-  displayPlayerCardCount();
+  setUpGame();
 };
 
-function displayEndGameOptions() {
-  setTimeout(function() {
-    display(playerChoiceBox);
-  }, 3000);
+function gameReload() {
+  if(localStorage.length === 0 ) {
+    newPlayers();
+  } else {
+    playAgain();
+  }
 };
