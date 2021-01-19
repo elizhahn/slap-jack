@@ -90,7 +90,7 @@ The Application page will display two player piles with an empty space for the m
 
 Each player will be able to start the game by dealing a card using "q" (player 1) and "p" (player 2). Player one will always start. As a card is dealt the card count should reflect how many cards each player currently has in their hand. Additionally each player has a color and when their card is dealt, their color will appear in the middle pile. 
 
-![](https://gph.is/g/ZnNDmMJ)
+![](https://media.giphy.com/media/0Nx8aujFcLv5ZGiGp0/giphy.gif)
 
 
 ## Slap Cards
