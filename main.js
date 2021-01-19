@@ -226,6 +226,7 @@ function winningSlapPlayer1() {
     displayWinningMessage("SLAPJACK", "player 1");
     displayPlayerCardCount();
     currentGame.players[0].wins++;
+    displayPlayerWins(); 
     displayEndGameOptions();
   }
 };
@@ -239,6 +240,7 @@ function winningSlapPlayer2() {
     displayWinningMessage("SLAPJACK", "player 2");
     displayPlayerCardCount();
     currentGame.players[1].wins++;
+    displayPlayerWins();
     displayEndGameOptions();
   }
 };
@@ -266,6 +268,7 @@ function redemptionAttemptPlayer1() {
 } else {
     displayWinningMessage("INVALID SLAP", "player 2");
     currentGame.players[1].wins++;
+    displayPlayerWins();
     displayEndGameOptions();
   }
 };
@@ -283,6 +286,7 @@ function redemptionAttemptPlayer2() {
 } else {
     displayWinningMessage("INVALID SLAP", "player 1");
     currentGame.players[0].wins++;
+    displayPlayerWins();
     displayEndGameOptions();
   }
 };
