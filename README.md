@@ -83,6 +83,7 @@ This is a Turing School of Software and Design Module 1 project. This project en
 ## DeskTop Layout
 
 The Application page will display two player piles with an empty space for the middle pile. Each player will have a card count displayed above their pile and a win count displayed below their pile. 
+
 ![](https://media.giphy.com/media/mirTQN89cRKuoEGc91/giphy.gif)
 
 
