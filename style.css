@@ -11,6 +11,7 @@ html {
 body {
   height: 100%;
   background: linear-gradient(90deg, #de16a5, #f07b32 70%);
+  position: absolute;
 }
 
 h1 {
@@ -53,6 +54,47 @@ h1 {
   font-size: 1.3em;
   text-shadow: #fff 1px 0px 10px;
 }
+
+/* ---------------MODAL BOX------------------------ */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color:rgba(0, 0, 0, 0.7);
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+}
+
+.modal-content {
+  list-style-type: none;
+  padding: 0px;
+  position: absolute;
+  top: 35%;
+  left: 30%;
+  box-shadow:  0 4px 8px 0 rgba(0,0,0,0.4);
+  background-color: #b4f0eb;
+  border-radius: 5px;
+  height: 35%;
+  width: 40%;
+}
+
+.modal-button {
+  margin: 50px 175px;
+  height: 40px;
+  width: 200px;
+  font-size: 1.3em;
+  border: none;
+  background: linear-gradient(90deg, #de16a5, #f07b32 70%);
+  border-radius: 5px;
+}
+
+.show-modal {
+  opacity: 1;
+  visibility: visible;
+}
+
 
 /* ---------------CARD COLORS---------------------- */
 
