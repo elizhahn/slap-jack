@@ -8,10 +8,12 @@ class Player {
     var currentCard = this.hand.splice(-1);
     return currentCard[0];
   };
+
   saveToStorage() {
     var player = JSON.stringify(this);
     localStorage.setItem(this.id, player);
   };
+
   shufflePlayerDeck() {
     var shuffledCards = [];
     var playerCardAmount = this.hand.length;
@@ -22,8 +24,9 @@ class Player {
   }
     this.hand = shuffledCards;
   };
+  
   playerCardCount() {
    var cardCount = this.hand.length
-   return cardCount; 
+   return cardCount;
  }
 };
