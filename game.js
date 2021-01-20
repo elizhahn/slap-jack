@@ -72,8 +72,8 @@ class Game {
     this.players = players;
     this.currentPlayer = 1;
     this.middlePile = [];
-    this.whoSlapped;
-    this.slapType;
+    this.whoSlapped = 0;
+    this.slapType = ""; 
   }
   shuffleDeck() {
     var shuffledCards = [];
