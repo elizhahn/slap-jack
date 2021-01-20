@@ -112,8 +112,14 @@ function switchPlayers() {
 }
 };
 
-function playCard() {
+function validateKeyCode(event) {
   if(event.keyCode !== 81 && event.keyCode !== 80 && event.keyCode !== 70 && event.keyCode !== 74) {
+    return true;
+  }
+};
+
+function playCard() {
+  if(validateKeyCode(event)) {
     return;
   }
   else if(!checkEmptyHand()) {
@@ -151,7 +157,7 @@ function validateSlapCard1() {
   currentGame.whoSlapped = 1;
     if(currentGame.slap()) {
       hide(middlePile);
-    } 
+    }
     displaySlapMessage("player 2");
 };
 
