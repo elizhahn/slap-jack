@@ -151,10 +151,8 @@ function validateSlapCard1() {
   currentGame.whoSlapped = 1;
     if(currentGame.slap()) {
       hide(middlePile);
-      displaySlapMessage("player 2");
-  } else {
-      displaySlapMessage("player 2");
-  }
+    } 
+    displaySlapMessage("player 2");
 };
 
 function validatePlayCard2() {
@@ -172,10 +170,8 @@ function validateSlapCard2() {
   currentGame.whoSlapped = 2;
   if(currentGame.slap()) {
     hide(middlePile);
-    displaySlapMessage("player 1");
-} else {
-    displaySlapMessage("player 1");
-}
+  }
+  displaySlapMessage("player 1");
 };
 
 function lastPlay(event) {
@@ -308,7 +304,7 @@ function saveGame() {
 };
 
 function setUpGame() {
-  hide(message); 
+  hide(message);
   display(playerPile1);
   display(playerPile2);
   displayPlayerWins();
