@@ -169,9 +169,9 @@ function lastPlay(event) {
      winnerDeals(currentGame.players[1]);
     displayPlayerCardCount();
 } else if(event.keyCode === 70 && currentGame.players[1].hand.length === 0) {
-    winningSlapPlayer1();
+    winningSlap(1, "player 2");
 } else if(event.keyCode === 74 && currentGame.players[0].hand.length === 0) {
-    winningSlapPlayer2();
+    winningSlap(2, "player 1");
 }
   redemptionSlap(event);
 };
@@ -188,30 +188,45 @@ function winnerDeals(player) {
   }
 }
 
-function winningSlapPlayer1() {
-  if(checkMiddlePile()) {
-    return;
-  }
-  currentGame.whoSlapped = 1;
-  if(currentGame.slapJack()) {
-    displayWinningMessage("SLAPJACK", "player 1");
-    displayPlayerCardCount();
-    currentGame.players[0].wins++;
-    saveGame();
-    displayPlayerWins();
-    displayEndGameOptions();
-  }
-};
+// function winningSlapPlayer1() {
+//   if(checkMiddlePile()) {
+//     return;
+//   }
+//   currentGame.whoSlapped = 1;
+//   if(currentGame.slapJack()) {
+//     displayWinningMessage("SLAPJACK", "player 1");
+//     displayPlayerCardCount();
+//     currentGame.players[0].wins++;
+//     saveGame();
+//     displayPlayerWins();
+//     displayEndGameOptions();
+//   }
+// };
+//
+// function winningSlapPlayer2() {
+//   if(checkMiddlePile()) {
+//     return;
+//   }
+//   currentGame.whoSlapped = 2;
+//   if(currentGame.slapJack()) {
+//     displayWinningMessage("SLAPJACK", "player 2");
+//     displayPlayerCardCount();
+//     currentGame.players[1].wins++;
+//     saveGame();
+//     displayPlayerWins();
+//     displayEndGameOptions();
+//   }
+// };
 
-function winningSlapPlayer2() {
+function winningSlap(whoSlapped, losingPlayer) {
   if(checkMiddlePile()) {
     return;
   }
-  currentGame.whoSlapped = 2;
+  currentGame.whoSlapped = whoSlapped;
   if(currentGame.slapJack()) {
     displayWinningMessage("SLAPJACK", "player 2");
     displayPlayerCardCount();
-    currentGame.players[1].wins++;
+    currentGame.players[whoSlapped].wins++;
     saveGame();
     displayPlayerWins();
     displayEndGameOptions();
