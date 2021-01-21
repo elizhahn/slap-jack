@@ -46,7 +46,7 @@ function createAltText() {
 function displayMiddleCard() {
   display(middlePile);
   var currentCard = currentGame.middlePile[currentGame.middlePile.length - 1];
-    if(currentGame.currentPlayer === 1) {
+    if(currentGame.currentPlayer === 0) {
       middlePile.innerHTML = `<img class="player-cards middle-card-player-1" src="${currentCard}" id="currentCard" alt="card ${createAltText()}">`
    } else {
       middlePile.innerHTML = `<img class="player-cards middle-card-player-2" src="${currentCard}" id="currentCard" alt="card ${createAltText()}">`
@@ -63,11 +63,11 @@ function displaySlapMessage(player) {
   var slaps = ["JACK", "DOUBLE", "SANDWICH"];
   for(var i = 0; i < slaps.length; i++) {
     if(currentGame.slapType === slaps[i]) {
-      message.innerText = `${slaps[i]}! Player ${currentGame.whoSlapped} takes the pile!`
+      message.innerText = `${slaps[i]}! Player ${currentGame.whoSlapped + 1} takes the pile!`
     }
   };
   if(currentGame.slapType === "INVALID") {
-  message.innerText = `INVALID SLAP! Player ${currentGame.whoSlapped} forfeits a card to ${player}!`
+  message.innerText = `INVALID SLAP! Player ${currentGame.whoSlapped + 1} forfeits a card to ${player}!`
   }
 };
 
@@ -89,10 +89,10 @@ function displayPlayerWins() {
 
 function checkEmptyHand() {
   if(currentGame.players[0].hand.length === 0) {
-    currentGame.currentPlayer = 2;
+    currentGame.currentPlayer = 1;
     return true;
 } else if(currentGame.players[1].hand.length === 0) {
-    currentGame.currentPlayer = 1;
+    currentGame.currentPlayer = 0;
     return true;
 }
   return false;
@@ -105,10 +105,10 @@ function checkMiddlePile() {
 };
 
 function switchPlayers() {
-  if(currentGame.currentPlayer === 1) {
-    currentGame.currentPlayer = 2;
-} else {
+  if(currentGame.currentPlayer === 0) {
     currentGame.currentPlayer = 1;
+} else {
+    currentGame.currentPlayer = 0;
 }
 };
 
@@ -132,14 +132,14 @@ function playCard() {
 };
 
 function validatePlayAction(event) {
-  if(event.keyCode === 81 && currentGame.currentPlayer === 1) {
+  if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
     validatePlayCard();
 } else if(event.keyCode === 70) {
-    validateSlapCard(1);
-} else if(event.keyCode === 80 && currentGame.currentPlayer === 2) {
+    validateSlapCard(0);
+} else if(event.keyCode === 80 && currentGame.currentPlayer === 1) {
     validatePlayCard();
 } else if (event.keyCode === 74) {
-    validateSlapCard(2);
+    validateSlapCard(1);
 }
 };
 
@@ -162,16 +162,16 @@ function validateSlapCard(whoSlapped) {
 };
 
 function lastPlay(event) {
-  if(event.keyCode === 81 && currentGame.currentPlayer === 1) {
+  if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
      winnerDeals(currentGame.players[0]);
     displayPlayerCardCount();
-} else if( event.keyCode === 80 && currentGame.currentPlayer === 2) {
+} else if( event.keyCode === 80 && currentGame.currentPlayer === 1) {
      winnerDeals(currentGame.players[1]);
     displayPlayerCardCount();
 } else if(event.keyCode === 70 && currentGame.players[1].hand.length === 0) {
-    winningSlap(1, "player 2");
+    winningSlap(0, "player 1");
 } else if(event.keyCode === 74 && currentGame.players[0].hand.length === 0) {
-    winningSlap(2, "player 1");
+    winningSlap(1, "player 2");
 }
   redemptionSlap(event);
 };
@@ -188,43 +188,13 @@ function winnerDeals(player) {
   }
 }
 
-// function winningSlapPlayer1() {
-//   if(checkMiddlePile()) {
-//     return;
-//   }
-//   currentGame.whoSlapped = 1;
-//   if(currentGame.slapJack()) {
-//     displayWinningMessage("SLAPJACK", "player 1");
-//     displayPlayerCardCount();
-//     currentGame.players[0].wins++;
-//     saveGame();
-//     displayPlayerWins();
-//     displayEndGameOptions();
-//   }
-// };
-//
-// function winningSlapPlayer2() {
-//   if(checkMiddlePile()) {
-//     return;
-//   }
-//   currentGame.whoSlapped = 2;
-//   if(currentGame.slapJack()) {
-//     displayWinningMessage("SLAPJACK", "player 2");
-//     displayPlayerCardCount();
-//     currentGame.players[1].wins++;
-//     saveGame();
-//     displayPlayerWins();
-//     displayEndGameOptions();
-//   }
-// };
-
-function winningSlap(whoSlapped, losingPlayer) {
+function winningSlap(whoSlapped, winningPlayer) {
   if(checkMiddlePile()) {
     return;
   }
   currentGame.whoSlapped = whoSlapped;
   if(currentGame.slapJack()) {
-    displayWinningMessage("SLAPJACK", "player 2");
+    displayWinningMessage("SLAPJACK", winningPlayer);
     displayPlayerCardCount();
     currentGame.players[whoSlapped].wins++;
     saveGame();
@@ -237,24 +207,24 @@ function redemptionSlap(event) {
   var playerHand0 = currentGame.players[0].hand;
   var playerHand1 = currentGame.players[1].hand;
   if(event.keyCode === 70 && playerHand0.length === 0) {
-    redemptionAttempt(playerPile1, 1);
+    redemptionAttempt(0, playerPile1, "player 1", "player 2");
 } else if(event.keyCode === 74 && playerHand1.length === 0) {
-    redemptionAttempt(playerPile2, 2);
+    redemptionAttempt(1, playerPile2, "player 2", "player 1");
 }
 };
 
-function redemptionAttempt(playerPile, whoSlapped) {
+function redemptionAttempt(whoSlapped, playerPile, redemptionPlayer, winningPlayer) {
   if(checkMiddlePile()) {
     return;
   }
   currentGame.whoSlapped = whoSlapped;
   if(currentGame.slapJack()) {
     display(playerPile);
-    displayRedemptionMessage("player 2");
+    displayRedemptionMessage(redemptionPlayer);
     displayPlayerCardCount();
     currentGame.currentPlayer = whoSlapped;
 } else {
-    displayWinningMessage("INVALID SLAP", "player 1");
+    displayWinningMessage("INVALID SLAP", winningPlayer);
     currentGame.players[0].wins++;
     saveGame();
     displayPlayerWins();
@@ -287,20 +257,20 @@ function setUpGame() {
 function newPlayers() {
   hide(playerChoiceBox);
   localStorage.clear();
-  var player1 = new Player(0, 1);
-  var player2 = new Player(0, 2);
+  var player1 = new Player(0, 0);
+  var player2 = new Player(0, 1);
   currentGame = new Game([player1, player2]);
   setUpGame();
 };
 
 function playAgain() {
   hide(playerChoiceBox);
-  var savedPlayer1 = localStorage.getItem("1");
-  var savedPlayer2 = localStorage.getItem("2");
+  var savedPlayer1 = localStorage.getItem("0");
+  var savedPlayer2 = localStorage.getItem("1");
   savedPlayer1 = JSON.parse(savedPlayer1);
   savedPlayer2 = JSON.parse(savedPlayer2);
-  savedPlayer1 = new Player(savedPlayer1.wins, 1);
-  savedPlayer2 = new Player(savedPlayer2.wins, 2);
+  savedPlayer1 = new Player(savedPlayer1.wins, 0);
+  savedPlayer2 = new Player(savedPlayer2.wins, 1);
   currentGame = new Game([savedPlayer1, savedPlayer2]);
   setUpGame();
 };
