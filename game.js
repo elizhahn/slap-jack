@@ -1,80 +1,14 @@
 class Game {
   constructor(players) {
-    this.cards = [
-    "card-deck-assets/blue-01.png",
-    "card-deck-assets/blue-02.png",
-    "card-deck-assets/blue-03.png",
-    "card-deck-assets/blue-04.png",
-    "card-deck-assets/blue-05.png",
-    "card-deck-assets/blue-06.png",
-    "card-deck-assets/blue-07.png",
-    "card-deck-assets/blue-08.png",
-    "card-deck-assets/blue-09.png",
-    "card-deck-assets/blue-10.png",
-    "card-deck-assets/blue-jack.png",
-    "card-deck-assets/blue-queen.png",
-    "card-deck-assets/blue-king.png",
-    "card-deck-assets/gold-01.png",
-    "card-deck-assets/gold-02.png",
-    "card-deck-assets/gold-03.png",
-    "card-deck-assets/gold-04.png",
-    "card-deck-assets/gold-05.png",
-    "card-deck-assets/gold-06.png",
-    "card-deck-assets/gold-07.png",
-    "card-deck-assets/gold-08.png",
-    "card-deck-assets/gold-09.png",
-    "card-deck-assets/gold-10.png",
-    "card-deck-assets/gold-jack.png",
-    "card-deck-assets/gold-queen.png",
-    "card-deck-assets/gold-king.png",
-    "card-deck-assets/green-01.png",
-    "card-deck-assets/green-02.png",
-    "card-deck-assets/green-03.png",
-    "card-deck-assets/green-04.png",
-    "card-deck-assets/green-05.png",
-    "card-deck-assets/green-06.png",
-    "card-deck-assets/green-07.png",
-    "card-deck-assets/green-08.png",
-    "card-deck-assets/green-09.png",
-    "card-deck-assets/green-10.png",
-    "card-deck-assets/green-jack.png",
-    "card-deck-assets/green-queen.png",
-    "card-deck-assets/green-king.png",
-    "card-deck-assets/red-01.png",
-    "card-deck-assets/red-02.png",
-    "card-deck-assets/red-03.png",
-    "card-deck-assets/red-04.png",
-    "card-deck-assets/red-05.png",
-    "card-deck-assets/red-06.png",
-    "card-deck-assets/red-07.png",
-    "card-deck-assets/red-08.png",
-    "card-deck-assets/red-09.png",
-    "card-deck-assets/red-10.png",
-    "card-deck-assets/red-jack.png",
-    "card-deck-assets/red-queen.png",
-    "card-deck-assets/red-king.png"
-    ];
-    this.suits = {
-    "1" : ["card-deck-assets/gold-01.png", "card-deck-assets/blue-01.png", "card-deck-assets/green-01.png","card-deck-assets/red-01.png"],
-    "2" : ["card-deck-assets/blue-02.png", "card-deck-assets/gold-02.png", "card-deck-assets/green-02.png", "card-deck-assets/red-02.png"],
-    "3" : [ "card-deck-assets/blue-03.png", "card-deck-assets/gold-03.png", "card-deck-assets/green-03.png", "card-deck-assets/red-03.png"],
-    "4" : ["card-deck-assets/blue-04.png", "card-deck-assets/gold-04.png", "card-deck-assets/green-04.png", "card-deck-assets/red-04.png"],
-    "5" : ["card-deck-assets/blue-05.png", "card-deck-assets/gold-05.png", "card-deck-assets/green-05.png", "card-deck-assets/red-05.png"],
-    "6" : ["card-deck-assets/gold-06.png", "card-deck-assets/blue-06.png", "card-deck-assets/green-06.png", "card-deck-assets/red-06.png"],
-    "7" : ["card-deck-assets/gold-07.png", "card-deck-assets/blue-07.png", "card-deck-assets/green-07.png", "card-deck-assets/red-07.png"],
-    "8" : ["card-deck-assets/blue-08.png", "card-deck-assets/gold-08.png", "card-deck-assets/green-08.png", "card-deck-assets/red-08.png"],
-    "9" : ["card-deck-assets/blue-09.png", "card-deck-assets/gold-09.png", "card-deck-assets/green-09.png", "card-deck-assets/red-09.png"],
-    "10" :["card-deck-assets/blue-10.png", "card-deck-assets/gold-10.png", "card-deck-assets/green-10.png", "card-deck-assets/red-10.png"],
-    "jack":["card-deck-assets/blue-jack.png", "card-deck-assets/gold-jack.png", "card-deck-assets/green-jack.png", "card-deck-assets/red-jack.png"],
-    "queen" :["card-deck-assets/blue-queen.png","card-deck-assets/gold-queen.png","card-deck-assets/green-queen.png", "card-deck-assets/red-queen.png"],
-    "king" : ["card-deck-assets/blue-king.png", "card-deck-assets/gold-king.png", "card-deck-assets/green-king.png", "card-deck-assets/red-king.png"]
-    }
+    this.cards = cards.slice(0);
+    this.suits = suits;
     this.players = players;
     this.currentPlayer = 1;
     this.middlePile = [];
-    this.whoSlapped;
-    this.slapType;
+    this.whoSlapped = 0;
+    this.slapType = "";
   }
+  
   shuffleDeck() {
     var shuffledCards = [];
     for(var i = 0; i < 52; i++) {
@@ -83,13 +17,15 @@ class Game {
       shuffledCards.push(randomCard[0]);
     };
     this.cards = shuffledCards;
-  }
+  };
+
   dealCards() {
     var player1Cards = this.cards.splice(0, 26);
     var player2Cards = this.cards.splice(0);
     this.players[0].hand = player1Cards;
     this.players[1].hand = player2Cards;
-  }
+  };
+
   playCard() {
     if(this.currentPlayer === 1) {
       this.middlePile.push(this.players[0].playCard());
@@ -97,6 +33,7 @@ class Game {
       this.middlePile.push(this.players[1].playCard());
     }
   };
+
   slap() {
     if(this.slapJack()) {
         this.slapType = "JACK";
@@ -113,6 +50,7 @@ class Game {
         return false;
   }
   };
+
     slapJack() {
       var lastCard = this.middlePile[this.middlePile.length - 1];
       var jacks = this.suits.jack;
@@ -129,6 +67,7 @@ class Game {
           return true;
       }
     };
+
     slapDouble() {
       var cardsWon;
       var length = this.middlePile.length;
@@ -147,6 +86,7 @@ class Game {
             }
          };
      };
+
      slapSandwich(){
       var cardsWon;
       var length = this.middlePile.length;
@@ -165,6 +105,7 @@ class Game {
           }
         };
       };
+
       invalidSlap() {
         if(this.whoSlapped === 1) {
           var length = this.players[0].hand.length;
