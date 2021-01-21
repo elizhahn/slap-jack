@@ -133,47 +133,28 @@ function playCard() {
 
 function validatePlayAction(event) {
   if(event.keyCode === 81 && currentGame.currentPlayer === 1) {
-    validatePlayCard1();
-  } else if(event.keyCode === 70) {
-    validateSlapCard1();
-  } else if(event.keyCode === 80 && currentGame.currentPlayer === 2) {
-    validatePlayCard2();
-  } else if (event.keyCode === 74) {
-    validateSlapCard2();
-  }
+    validatePlayCard();
+} else if(event.keyCode === 70) {
+    validateSlapCard(1);
+} else if(event.keyCode === 80 && currentGame.currentPlayer === 2) {
+    validatePlayCard();
+} else if (event.keyCode === 74) {
+    validateSlapCard(2);
+}
 };
 
-function validatePlayCard1() {
+function validatePlayCard(player) {
   currentGame.playCard();
   hide(message);
   displayMiddleCard();
   switchPlayers();
-};
+}
 
-function validateSlapCard1() {
+function validateSlapCard(whoSlapped) {
   if(checkMiddlePile()) {
     return;
   }
-  currentGame.whoSlapped = 1;
-    if(currentGame.slap()) {
-      hide(middlePile);
-    }
-    displaySlapMessage("player 2");
-};
-
-function validatePlayCard2() {
-   currentGame.playCard();
-   hide(message);
-   displayMiddleCard();
-   display(middlePile);
-   switchPlayers();
-};
-
-function validateSlapCard2() {
-  if(checkMiddlePile()) {
-    return;
-  }
-  currentGame.whoSlapped = 2;
+  currentGame.whoSlapped = whoSlapped;
   if(currentGame.slap()) {
     hide(middlePile);
   }
@@ -183,11 +164,9 @@ function validateSlapCard2() {
 function lastPlay(event) {
   if(event.keyCode === 81 && currentGame.currentPlayer === 1) {
      winnerDeals(currentGame.players[0]);
-    // winnerDealsPlayer1();
     displayPlayerCardCount();
 } else if( event.keyCode === 80 && currentGame.currentPlayer === 2) {
      winnerDeals(currentGame.players[1]);
-    //winnerDealsPlayer2();
     displayPlayerCardCount();
 } else if(event.keyCode === 70 && currentGame.players[1].hand.length === 0) {
     winningSlapPlayer1();
