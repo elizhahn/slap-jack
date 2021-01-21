@@ -182,12 +182,12 @@ function validateSlapCard2() {
 
 function lastPlay(event) {
   if(event.keyCode === 81 && currentGame.currentPlayer === 1) {
-    // winnerDeals();
-    winnerDealsPlayer1();
+     winnerDeals(currentGame.players[0]);
+    // winnerDealsPlayer1();
     displayPlayerCardCount();
 } else if( event.keyCode === 80 && currentGame.currentPlayer === 2) {
-    // winnerDeals();
-    winnerDealsPlayer2();
+     winnerDeals(currentGame.players[1]);
+    //winnerDealsPlayer2();
     displayPlayerCardCount();
 } else if(event.keyCode === 70 && currentGame.players[1].hand.length === 0) {
     winningSlapPlayer1();
@@ -197,48 +197,17 @@ function lastPlay(event) {
   redemptionSlap(event);
 };
 
-function winnerDealsPlayer1() {
-  var playerHand0 = currentGame.players[0].hand;
+function winnerDeals(player) {
+  var winningHand = player.hand;
   currentGame.playCard();
   displayMiddleCard();
-  if(playerHand0.length === 0) {
-     hide(middlePile);
-     var cardsWon = currentGame.middlePile.splice(0);
-     currentGame.players[0].hand = cardsWon;
-     currentGame.players[0].shufflePlayerDeck();
-  }
-};
-
-function winnerDealsPlayer2() {
-  var playerHand1 = currentGame.players[1].hand;
-  currentGame.playCard();
-  displayMiddleCard();
-  if(playerHand1.length === 0) {
+  if(winningHand.length === 0) {
     hide(middlePile);
-    var cardsWon = currentGame.middlePile.splice(0);
-    currentGame.players[1].hand = cardsWon;
-    currentGame.players[1].shufflePlayerDeck();
+    var middleCards = currentGame.middlePile.splice(0);
+    player.hand = middleCards;
+    player.hand.shufflePlayerDeck();
   }
-};
-
-//refactor winnerDealsPlayer1
-// function winnerDeals() {
-//   var playerHand1 = currentGame.players[0].hand;
-//   var playerHand2 = currentGame.players[1].hand;
-//   currentGame.playCard();
-//   displayMiddleCard();
-//   if(playerHand1.length === 0 && currentGame.currentPlayer === 1)  {
-//     hide(middlePile);
-//     var middleCards = currentGame.middlePile.splice(0);
-//     currentGame.players[0].hand = middleCards;
-//     currentGame.players[0].shufflePlayerDeck();
-// } else if(playerHand2.length === 0 && currentGame.currentPlayer === 2) {
-//     hide(middlePile);
-//     var middleCards = currentGame.middlePile.splice(0);
-//     currentGame.players[1].hand = middleCards;
-//     currentGame.players[1].shufflePlayerDeck();
-//   }
-// }
+}
 
 function winningSlapPlayer1() {
   if(checkMiddlePile()) {
