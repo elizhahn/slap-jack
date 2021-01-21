@@ -222,41 +222,22 @@ function redemptionSlap(event) {
   var playerHand0 = currentGame.players[0].hand;
   var playerHand1 = currentGame.players[1].hand;
   if(event.keyCode === 70 && playerHand0.length === 0) {
-    redemptionAttemptPlayer1();
+    redemptionAttempt(playerPile1, 1);
 } else if(event.keyCode === 74 && playerHand1.length === 0) {
-    redemptionAttemptPlayer2();
+    redemptionAttempt(playerPile2, 2);
 }
 };
 
-function redemptionAttemptPlayer1() {
+function redemptionAttempt(playerPile, whoSlapped) {
   if(checkMiddlePile()) {
     return;
   }
-  currentGame.whoSlapped = 1;
+  currentGame.whoSlapped = whoSlapped;
   if(currentGame.slapJack()) {
-    display(playerPile1);
-    displayRedemptionMessage("player 1");
-    displayPlayerCardCount();
-    currentGame.currentPlayer = 1;
-} else {
-    displayWinningMessage("INVALID SLAP", "player 2");
-    currentGame.players[1].wins++;
-    saveGame();
-    displayPlayerWins();
-    displayEndGameOptions();
-  }
-};
-
-function redemptionAttemptPlayer2() {
-  if(checkMiddlePile()) {
-    return;
-  }
-  currentGame.whoSlapped = 2;
-  if(currentGame.slapJack()) {
-    display(playerPile2);
+    display(playerPile);
     displayRedemptionMessage("player 2");
     displayPlayerCardCount();
-    currentGame.currentPlayer = 2;
+    currentGame.currentPlayer = whoSlapped;
 } else {
     displayWinningMessage("INVALID SLAP", "player 1");
     currentGame.players[0].wins++;
@@ -264,7 +245,7 @@ function redemptionAttemptPlayer2() {
     displayPlayerWins();
     displayEndGameOptions();
   }
-};
+}
 
 function displayEndGameOptions() {
   setTimeout(function() {
