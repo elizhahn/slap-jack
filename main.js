@@ -47,9 +47,11 @@ function displayMiddleCard() {
   display(middlePile);
   var currentCard = currentGame.middlePile[currentGame.middlePile.length - 1];
     if(currentGame.currentPlayer === 0) {
-      middlePile.innerHTML = `<img class="player-cards middle-card-player-1" src="${currentCard}" id="currentCard" alt="card ${createAltText()}">`
+      middlePile.innerHTML =
+      `<img class="player-cards middle-card-player-1" src="${currentCard}" id="currentCard" alt="card ${createAltText()}">`
    } else {
-      middlePile.innerHTML = `<img class="player-cards middle-card-player-2" src="${currentCard}" id="currentCard" alt="card ${createAltText()}">`
+      middlePile.innerHTML =
+      `<img class="player-cards middle-card-player-2" src="${currentCard}" id="currentCard" alt="card ${createAltText()}">`
    }
 };
 
@@ -60,16 +62,18 @@ function displayPlayerCardCount() {
 
 function displaySlapMessage(player) {
   display(message);
-  var slaps = ["JACK", "DOUBLE", "SANDWICH"];
-  for(var i = 0; i < slaps.length; i++) {
-    if(currentGame.slapType === slaps[i]) {
-      message.innerText = `${slaps[i]}! Player ${currentGame.whoSlapped + 1} takes the pile!`
-    }
-  };
-  if(currentGame.slapType === "INVALID") {
-  message.innerText = `INVALID SLAP! Player ${currentGame.whoSlapped + 1} forfeits a card to ${player}!`
-  }
-};
+   var slap = currentGame.slapType;
+    switch (currentGame.slapType) {
+      case "JACK":
+      case "DOUBLE":
+      case "SANDWICH":
+        message.innerText = `${slap}! Player ${currentGame.whoSlapped + 1} takes the pile!`;
+        break;
+      case "INVALID":
+        message.innerText = `INVALID SLAP! Player ${currentGame.whoSlapped + 1} forfeits a card to ${player}!`;
+        break;
+     }
+}
 
 function displayRedemptionMessage(player) {
   message.innerText = `REDEMPTION! ${player} back in the game!!`;
@@ -118,11 +122,22 @@ function validateKeyCode(event) {
   }
 };
 
+// function playCard() {
+//   if(validateKeyCode(event)) {
+//     return;
+//   }
+//   else if(!checkEmptyHand()) {
+//     validatePlayAction(event);
+//     displayPlayerCardCount();
+//     checkPlayerPile();
+// } else {
+//   lastPlay(event);
+// }
+// };
+
+//Refactor
 function playCard() {
-  if(validateKeyCode(event)) {
-    return;
-  }
-  else if(!checkEmptyHand()) {
+  if(!checkEmptyHand()) {
     validatePlayAction(event);
     displayPlayerCardCount();
     checkPlayerPile();
@@ -131,17 +146,38 @@ function playCard() {
 }
 };
 
+// function validatePlayAction(event) {
+//   if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
+//     validatePlayCard();
+// } else if(event.keyCode === 70) {
+//     validateSlapCard(0);
+// } else if(event.keyCode === 80 && currentGame.currentPlayer === 1) {
+//     validatePlayCard();
+// } else if (event.keyCode === 74) {
+//     validateSlapCard(1);
+// }
+// };
+
+//Refactor
 function validatePlayAction(event) {
-  if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
-    validatePlayCard();
-} else if(event.keyCode === 70) {
-    validateSlapCard(0);
-} else if(event.keyCode === 80 && currentGame.currentPlayer === 1) {
-    validatePlayCard();
-} else if (event.keyCode === 74) {
-    validateSlapCard(1);
+  switch (true) {
+    case (event.keyCode === 81 && currentGame.currentPlayer === 0):
+      validatePlayCard();
+      break;
+    case (event.keyCode === 80 && currentGame.currentPlayer === 1):
+      validatePlayCard();
+      break;
+    case event.keyCode === 70:
+      validateSlapCard(0);
+      break;
+    case event.keyCode === 74:
+      validateSlapCard(1);
+      break;
+    default:
+      return;
+  }
 }
-};
+
 
 function validatePlayCard(player) {
   currentGame.playCard();
@@ -239,10 +275,8 @@ function displayEndGameOptions() {
 };
 
 function saveGame() {
-  for(var i = 0; i < 2; i++) {
-    currentGame.players[i].saveToStorage();
-  }
-};
+  currentGame.players.forEach(player => player.saveToStorage());
+}
 
 function setUpGame() {
   hide(message);
