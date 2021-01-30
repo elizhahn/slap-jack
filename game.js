@@ -35,21 +35,21 @@ class Game {
   };
 
   slap() {
-    if(this.slapJack()) {
-        this.slapType = "JACK";
-        return true;
-  } else if(this.slapDouble()) {
-        this.slapType = "DOUBLE";
-        return true;
-  } else if(this.slapSandwich()) {
-        this.slapType = "SANDWICH";
-        return true;
-  } else {
-        this.invalidSlap();
-        this.slapType = "INVALID";
-        return false;
+    switch (true) {
+      case this.slapJack():
+      this.slapType = "JACK";
+      return true;
+      case this.slapDouble():
+      this.slapType = "DOUBLE";
+      return true;
+      case this.slapSandwich():
+      this.slapType = "SANDWICH";
+      return true;
+      case this.invalidSlap():
+      this.slapType = "INVALID";
+      return false;
+    }
   }
-  };
 
     slapJack() {
       var lastCard = this.middlePile[this.middlePile.length - 1];
