@@ -45,7 +45,7 @@ class Game {
       case this.slapSandwich():
       this.slapType = "SANDWICH";
       return true;
-      case this.invalidSlap():
+      default:
       this.slapType = "INVALID";
       return false;
     }
