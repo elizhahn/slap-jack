@@ -122,20 +122,6 @@ function validateKeyCode(event) {
   }
 };
 
-// function playCard() {
-//   if(validateKeyCode(event)) {
-//     return;
-//   }
-//   else if(!checkEmptyHand()) {
-//     validatePlayAction(event);
-//     displayPlayerCardCount();
-//     checkPlayerPile();
-// } else {
-//   lastPlay(event);
-// }
-// };
-
-//Refactor
 function playCard() {
   if(!checkEmptyHand()) {
     validatePlayAction(event);
@@ -146,19 +132,6 @@ function playCard() {
 }
 };
 
-// function validatePlayAction(event) {
-//   if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
-//     validatePlayCard();
-// } else if(event.keyCode === 70) {
-//     validateSlapCard(0);
-// } else if(event.keyCode === 80 && currentGame.currentPlayer === 1) {
-//     validatePlayCard();
-// } else if (event.keyCode === 74) {
-//     validateSlapCard(1);
-// }
-// };
-
-//Refactor
 function validatePlayAction(event) {
   switch (true) {
     case (event.keyCode === 81 && currentGame.currentPlayer === 0):
@@ -177,7 +150,6 @@ function validatePlayAction(event) {
       return;
   }
 }
-
 
 function validatePlayCard(player) {
   currentGame.playCard();
@@ -198,19 +170,29 @@ function validateSlapCard(whoSlapped) {
 };
 
 function lastPlay(event) {
-  if(event.keyCode === 81 && currentGame.currentPlayer === 0) {
-     winnerDeals(currentGame.players[0]);
-    displayPlayerCardCount();
-} else if( event.keyCode === 80 && currentGame.currentPlayer === 1) {
-     winnerDeals(currentGame.players[1]);
-    displayPlayerCardCount();
-} else if(event.keyCode === 70 && currentGame.players[1].hand.length === 0) {
+  var playerHand0 = currentGame.players[0].hand;
+  var playerHand1 = currentGame.players[1].hand;
+  switch (true) {
+    case (event.keyCode === 81 && currentGame.currentPlayer === 0):
+    winnerDeals(currentGame.players[0]);
+    break;
+    case (event.keyCode === 80 && currentGame.currentPlayer === 1):
+    winnerDeals(currentGame.players[1]);
+    break;
+    case (event.keyCode === 70 && currentGame.currentPlayer === 0):
     winningSlap(0, "player 1");
-} else if(event.keyCode === 74 && currentGame.players[0].hand.length === 0) {
+    break;
+    case (event.keyCode === 74 && currentGame.currentPlayer === 1):
     winningSlap(1, "player 2");
+    break;
+    case (event.keyCode === 70 && playerHand0.length === 0):
+    redemptionAttempt(0, playerPile1, "player 1", "player 2");
+    break;
+    case (event.keyCode === 74 && playerHand1.length === 0):
+    redemptionAttempt(1, playerPile2, "player 2", "player 1");
+    break;
+  }
 }
-  redemptionSlap(event);
-};
 
 function winnerDeals(player) {
   var winningHand = player.hand;
@@ -222,6 +204,7 @@ function winnerDeals(player) {
     player.hand = middleCards;
     player.hand.shufflePlayerDeck();
   }
+  displayPlayerCardCount();
 }
 
 function winningSlap(whoSlapped, winningPlayer) {
@@ -237,16 +220,6 @@ function winningSlap(whoSlapped, winningPlayer) {
     displayPlayerWins();
     displayEndGameOptions();
   }
-};
-
-function redemptionSlap(event) {
-  var playerHand0 = currentGame.players[0].hand;
-  var playerHand1 = currentGame.players[1].hand;
-  if(event.keyCode === 70 && playerHand0.length === 0) {
-    redemptionAttempt(0, playerPile1, "player 1", "player 2");
-} else if(event.keyCode === 74 && playerHand1.length === 0) {
-    redemptionAttempt(1, playerPile2, "player 2", "player 1");
-}
 };
 
 function redemptionAttempt(whoSlapped, playerPile, redemptionPlayer, winningPlayer) {
