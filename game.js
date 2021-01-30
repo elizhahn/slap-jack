@@ -34,15 +34,15 @@ class Game {
     }
   };
 
-  slap() {
+  slap(whoSlapped) {
     switch (true) {
-      case this.slapJack():
+      case this.slapJack(whoSlapped):
       this.slapType = "JACK";
       return true;
-      case this.slapDouble():
+      case this.slapDouble(whoSlapped):
       this.slapType = "DOUBLE";
       return true;
-      case this.slapSandwich():
+      case this.slapSandwich(whoSlapped):
       this.slapType = "SANDWICH";
       return true;
       default:
@@ -50,71 +50,49 @@ class Game {
       return false;
     }
   }
-
-    slapJack() {
+    slapJack(whoSlapped) {
       var lastCard = this.middlePile[this.middlePile.length - 1];
       var jacks = this.suits.jack;
       var cardsWon;
-        if(jacks.includes(lastCard) && this.whoSlapped === 0) {
+        if(jacks.includes(lastCard)) {
           cardsWon = this.middlePile.splice(0);
-          this.players[0].hand = [...this.players[0].hand, ...cardsWon];
-          this.players[0].shufflePlayerDeck();
+          this.players[whoSlapped].hand = [...this.players[whoSlapped].hand, ...cardsWon];
+          this.players[whoSlapped].shufflePlayerDeck();
           return true;
-      } else if(jacks.includes(lastCard) && this.whoSlapped === 1) {
-          cardsWon = this.middlePile.splice(0);
-          this.players[1].hand = [...this.players[1].hand, ...cardsWon];
-          this.players[1].shufflePlayerDeck();
-          return true;
-      }
-    };
+    }
+  }
 
-    slapDouble() {
-      var cardsWon;
-      var length = this.middlePile.length;
-        for(var suit in this.suits) {
-          var currentSuit = this.suits[suit];
-            if(currentSuit.includes(this.middlePile[length - 1]) && currentSuit.includes(this.middlePile[length - 2]) && this.whoSlapped === 0) {
-              cardsWon = this.middlePile.splice(0);
-              this.players[0].hand = [...this.players[0].hand, ...cardsWon];
-              this.players[0].shufflePlayerDeck();
-              return true;
-            } else if(currentSuit.includes(this.middlePile[length - 1]) && currentSuit.includes(this.middlePile[length - 2]) && this.whoSlapped === 1) {
-              cardsWon = this.middlePile.splice(0);
-              this.players[1].hand = [...this.players[1].hand, ...cardsWon];
-              this.players[1].shufflePlayerDeck();
-              return true;
-            }
-         };
-     };
-
-     slapSandwich(){
-      var cardsWon;
-      var length = this.middlePile.length;
-        for(var suit in this.suits) {
-          var currentSuit = this.suits[suit];
-            if(currentSuit.includes(this.middlePile[length - 1]) && currentSuit.includes(this.middlePile[length - 3]) && this.whoSlapped === 0) {
-              cardsWon = this.middlePile.splice(0);
-              this.players[0].hand = [...this.players[0].hand, ...cardsWon];
-              this.players[0].shufflePlayerDeck();
-              return true;
-          } else if(currentSuit.includes(this.middlePile[length - 1]) && currentSuit.includes(this.middlePile[length - 3]) && this.whoSlapped === 1) {
-              cardsWon = this.middlePile.splice(0);
-              this.players[1].hand = [...this.players[1].hand, ...cardsWon];
-              this.players[1].shufflePlayerDeck();
-              return true;
+  slapDouble(whoSlapped) {
+    var cardsWon;
+    var length = this.middlePile.length;
+      for(var suit in this.suits) {
+        var currentSuit = this.suits[suit];
+          if(currentSuit.includes(this.middlePile[length - 1]) && currentSuit.includes(this.middlePile[length - 2])) {
+            cardsWon = this.middlePile.splice(0);
+            this.players[whoSlapped].hand = [...this.players[whoSlapped].hand, ...cardsWon];
+            this.players[whoSlapped].shufflePlayerDeck();
+            return true;
           }
-        };
-      };
+       };
+   };
 
-      invalidSlap() {
-        if(this.whoSlapped === 0) {
-          var length = this.players[0].hand.length;
-          var topCard = this.players[0].hand.splice(length - 1);
-          this.players[1].hand.unshift(topCard[0]);
-      } else {
-          var length = this.players[1].hand.length;
-          var topCard = this.players[1].hand.splice(length - 1);
-          this.players[0].hand.unshift(topCard[0]);
-      }
+   slapSandwich(whoSlapped){
+    var cardsWon;
+    var length = this.middlePile.length;
+      for(var suit in this.suits) {
+        var currentSuit = this.suits[suit];
+          if(currentSuit.includes(this.middlePile[length - 1]) && currentSuit.includes(this.middlePile[length - 3])) {
+            cardsWon = this.middlePile.splice(0);
+            this.players[whoSlapped].hand = [...this.players[whoSlapped].hand, ...cardsWon];
+            this.players[whoSlapped].shufflePlayerDeck();
+            return true;
+        }
       };
     };
+
+  invalidSlap(whoSlapped) {
+    var length = this.players[whoSlapped].hand.length;
+    var topCard = this.players[whoSlapped].hand.splice(length - 1);
+    this.players[whoSlapped].hand.unshift(topCard[0]);
+ }
+}
