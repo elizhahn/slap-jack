@@ -142,16 +142,18 @@ function validatePlayAction(event) {
       break;
     case event.keyCode === 70:
       validateSlapCard(0);
+      displaySlapMessage("player 1");
       break;
     case event.keyCode === 74:
       validateSlapCard(1);
+      displaySlapMessage("player 2");
       break;
     default:
       return;
   }
 }
 
-function validatePlayCard(player) {
+function validatePlayCard() {
   currentGame.playCard();
   hide(message);
   displayMiddleCard();
@@ -163,10 +165,9 @@ function validateSlapCard(whoSlapped) {
     return;
   }
   currentGame.whoSlapped = whoSlapped;
-  if(currentGame.slap()) {
+  if(currentGame.slap(whoSlapped)) {
     hide(middlePile);
   }
-  displaySlapMessage("player 1");
 };
 
 function lastPlay(event) {
